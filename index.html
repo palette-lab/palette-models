@@ -2,36 +2,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Palette Models</title>
 <meta name="description" content="Palette's own Korean-first models, every number measured with a public scorer.">
-<script>(function(){var d=document.documentElement;if(!("animate" in Element.prototype))return;if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return;d.classList.add("pre");setTimeout(function(){d.classList.remove("pre")},4000)})();</script>
+<script>(function(){var d=document.documentElement;try{var th=localStorage.getItem("pm.theme");if(th)d.setAttribute("data-theme",th)}catch(e){}if(!("animate" in Element.prototype))return;if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return;d.classList.add("pre");setTimeout(function(){d.classList.remove("pre")},4000)})();</script>
 <link rel="icon" href="assets/icon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
 <style>
   :root{
     --bg:#050505; --panel:#0a0a0a; --panel2:#101010; --line:#262626; --line2:#1a1a1a;
     --ink:#ffffff; --ink2:rgba(255,255,255,.72); --ink3:rgba(255,255,255,.48);
     --bar:#3d3d3d; --bar-ours:#ffffff; --bar-ours2:#c9c9c9; --accent:#ffffff;
-    --good:#8ee6a1; --warn:#f2c94c; --sans:"Inter",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    --good:#8ee6a1; --warn:#f2c94c; --sans:"Inter","Noto Sans KR","Noto Sans JP",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   }
   *{box-sizing:border-box}
   html{color-scheme:dark}
+  html[data-theme="light"]{color-scheme:light;--bg:#f4f4f2;--panel:#ffffff;--panel2:#f8f8f6;--line:#d9d9d5;--line2:#e6e6e2;--ink:#0a0a0a;--ink2:rgba(10,10,10,.72);--ink3:rgba(10,10,10,.5);--bar:#c9c9c4;--bar-ours:#0a0a0a;--bar-ours2:#3a3a3a;--accent:#0a0a0a}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;padding-inline:16px}
   a{color:inherit}
   .wrap{max-width:none;margin:0 auto;padding-inline:clamp(8px,4vw,88px)}
-  header.top{position:sticky;top:0;z-index:20;background:rgba(5,5,5,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line2);margin-inline:-16px;padding-inline:16px}
+  header.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line2);margin-inline:-16px;padding-inline:16px}
   .nav{display:flex;align-items:center;gap:28px;height:64px}
   .brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:14px;color:var(--ink3);letter-spacing:.02em}
   .brand img{height:22px;width:auto;display:block}
+  html[data-theme="light"] .brand img{filter:invert(1)}
   .brand span{padding-left:10px;border-left:1px solid var(--line)}
   .nav ul{display:flex;gap:22px;list-style:none;margin:0 0 0 12px;padding:0;font-size:14px;color:var(--ink2)}
   .nav ul a{text-decoration:none}
   .nav ul a:hover{color:var(--ink)}
-  .nav .cta{margin-left:auto}
-  .btn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:#050505;text-decoration:none;font-weight:600;font-size:14px;padding:10px 16px 10px 10px;border:1px solid #fff}
-  .btn .gl{display:inline-grid;place-items:center;width:26px;height:26px;background:#050505;color:#fff;font-size:14px;font-weight:700}
-  .btn.ghost{background:transparent;color:#fff;border-color:var(--line)}
-  .btn.ghost .gl{background:#fff;color:#050505}
+  .nav .ctrls{margin-left:auto;display:flex;align-items:center;gap:10px}
+  .lang{display:inline-flex;border:1px solid var(--line)}
+  .lang button{background:transparent;color:var(--ink3);border:0;border-right:1px solid var(--line);font:inherit;font-size:12px;font-weight:600;padding:7px 10px;cursor:pointer;letter-spacing:.06em}
+  .lang button:last-child{border-right:0}
+  .lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+  .theme{background:transparent;color:var(--ink);border:1px solid var(--line);font-size:14px;width:34px;height:32px;cursor:pointer;display:inline-grid;place-items:center}
+  .theme .moon{display:none} html[data-theme="light"] .theme .moon{display:inline} html[data-theme="light"] .theme .sun{display:none}
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:600;font-size:14px;padding:10px 16px 10px 10px;border:1px solid var(--ink)}
+  .btn .gl{display:inline-grid;place-items:center;width:26px;height:26px;background:var(--bg);color:var(--ink);font-size:14px;font-weight:700}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn.ghost .gl{background:var(--ink);color:var(--bg)}
   html{scroll-snap-type:y proximity;scroll-padding-top:64px}
   section{min-height:calc(100vh - 64px);display:flex;align-items:center;padding-block:96px;border-bottom:1px solid var(--line2);margin-inline:-16px;padding-inline:16px;scroll-snap-align:start;background:var(--bg)}
   section>.wrap{width:100%}
@@ -39,16 +47,18 @@
   section#benchmarks,section#specs{min-height:0;scroll-snap-align:none;display:block}
   .hero{position:relative;min-height:calc(100vh - 64px);padding-block:80px;overflow:hidden;margin-inline:-16px;padding-inline:16px;display:flex;align-items:center}
   .hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-  .hero .veil{position:absolute;inset:0;pointer-events:none;background:radial-gradient(90% 80% at 22% 50%,rgba(5,5,5,.6) 0%,rgba(5,5,5,.2) 45%,rgba(5,5,5,0) 75%),linear-gradient(to bottom,rgba(5,5,5,.25),rgba(5,5,5,0) 25%,rgba(5,5,5,0) 75%,var(--bg))}
+  .hero .veil{position:absolute;inset:0;pointer-events:none;background:radial-gradient(90% 80% at 22% 50%,color-mix(in srgb,var(--bg) 60%,transparent) 0%,color-mix(in srgb,var(--bg) 20%,transparent) 45%,transparent 75%),linear-gradient(to bottom,color-mix(in srgb,var(--bg) 25%,transparent),transparent 25%,transparent 75%,var(--bg))}
   #method{position:relative;overflow:hidden}
   #knot{position:absolute;right:-12vw;top:50%;transform:translateY(-50%);width:min(58vw,820px);height:min(58vw,820px);pointer-events:none;opacity:.42}
   #method .wrap{position:relative;z-index:1}
   .hero .scrollhint{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);color:var(--ink3);font-size:12px;letter-spacing:.14em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px}
-  .hero .scrollhint i{width:1px;height:34px;background:linear-gradient(#fff,transparent);display:block;animation:drop 1.8s ease-in-out infinite}
+  .hero .scrollhint i{width:1px;height:34px;background:linear-gradient(var(--ink),transparent);display:block;animation:drop 1.8s ease-in-out infinite}
   @keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
   .hero .wrap{position:relative}
-  h1{font-size:clamp(40px,6.2vw,72px);line-height:1.12;font-weight:700;letter-spacing:-.025em;margin:0 0 22px;max-width:15ch;text-wrap:balance}
-  .lede{font-size:clamp(17px,1.6vw,22px);color:var(--ink2);max-width:52ch;margin:0 0 34px}
+  html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] p,html[lang="ko"] li,html[lang="ja"] h1,html[lang="ja"] h2,html[lang="ja"] p,html[lang="ja"] li{word-break:keep-all;overflow-wrap:anywhere}
+  html[lang="ko"] h1,html[lang="ja"] h1{max-width:17ch;letter-spacing:-.01em}
+  h1{font-size:clamp(40px,5.6vw,72px);line-height:1.08;font-weight:700;letter-spacing:-.03em;margin:0 0 22px;max-width:13ch;text-wrap:balance}
+  .lede{font-size:clamp(17px,1.5vw,21px);color:var(--ink2);max-width:46ch;margin:0 0 28px}
   .lede b{color:var(--ink);font-weight:600}
   .lede .dot{color:var(--ink3);padding:0 8px}
   h2{font-size:clamp(30px,4.2vw,50px);line-height:1.12;font-weight:700;letter-spacing:-.025em;margin:0 0 14px;text-wrap:balance;max-width:20ch}
@@ -75,14 +85,14 @@
   .ladder .r{color:var(--ink3);font-size:13px}
   .ladder .m{margin-top:auto;display:flex;flex-direction:column;gap:8px}
   .chip{display:inline-flex;align-items:center;gap:8px;font-size:13px;padding:6px 10px;border:1px solid var(--line);color:var(--ink2);width:fit-content}
-  .chip i{width:8px;height:8px;background:#fff;display:inline-block}
+  .chip i{width:8px;height:8px;background:var(--ink);display:inline-block}
   .chip.dim i{background:var(--bar)}
   /* ram bars */
   .tabs{display:inline-flex;border:1px solid var(--line);margin-bottom:34px}
   .tabs button{background:transparent;color:var(--ink2);border:0;padding:12px 22px;font:inherit;font-weight:600;font-size:14px;cursor:pointer;border-right:1px solid var(--line)}
   .tabs button:last-child{border-right:0}
-  .tabs button[aria-selected="true"]{background:#fff;color:#050505}
-  .tabs button:focus-visible{outline:2px solid #fff;outline-offset:-2px}
+  .tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+  .tabs button:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
   .ram{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));column-gap:64px;row-gap:26px}
   .rrow .lab{display:flex;justify-content:space-between;font-size:14px;margin-bottom:8px}
   .rrow .lab b{font-weight:600}
@@ -99,10 +109,11 @@
   .chart h3{margin:0}
   .chart .meta{color:var(--ink3);font-size:13px;margin:0 0 12px}
   .chart svg{width:100%;height:auto;display:block;overflow:visible}
+  .chart rect.bar.ours{fill:var(--bar-ours)} .chart rect.bar.cmp{fill:var(--bar)} .chart text.lbl{fill:var(--ink2)} .chart text.lbl.ours{fill:var(--ink)} .chart line.grid{stroke:var(--line2)}
   .chart .cap{color:var(--ink3);font-size:12.5px;margin:10px 0 0;line-height:1.5}
   .legend{display:flex;gap:18px;font-size:12.5px;color:var(--ink2);margin-top:6px}
   .legend i{width:10px;height:10px;display:inline-block;margin-right:6px;vertical-align:-1px}
-  .tip{position:fixed;pointer-events:none;background:#fff;color:#050505;font-size:12.5px;padding:6px 9px;border:1px solid #fff;transform:translate(-50%,calc(-100% - 10px));white-space:nowrap;opacity:0;transition:opacity .12s;z-index:30;font-variant-numeric:tabular-nums}
+  .tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12.5px;padding:6px 9px;border:1px solid #fff;transform:translate(-50%,calc(-100% - 10px));white-space:nowrap;opacity:0;transition:opacity .12s;z-index:30;font-variant-numeric:tabular-nums}
   .tip.on{opacity:1}
   /* cards */
   .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
@@ -110,7 +121,7 @@
   .card:hover{background:var(--panel2)}
   .card canvas{width:100%;height:96px;display:block}
   .card .st{position:absolute;top:18px;right:18px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--line);color:var(--ink2)}
-  .card .st.pub{border-color:#fff;color:#fff}
+  .card .st.pub{border-color:var(--ink);color:var(--ink)}
   .card .name{font-weight:700;font-size:20px;letter-spacing:-.01em}
   .card .base{color:var(--ink3);font-size:13px}
   .card .num{font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums;margin-top:auto}
@@ -124,7 +135,7 @@
   td a{color:var(--ink)}
   tr.ours td:first-child{font-weight:700}
   .stat{display:inline-block;padding:3px 8px;border:1px solid var(--line);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);white-space:nowrap}
-  .stat.pub{border-color:#fff;color:#fff}
+  .stat.pub{border-color:var(--ink);color:var(--ink)}
   /* closing */
   .closing{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
   .rules{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
@@ -162,7 +173,7 @@
   .paper .t{font-weight:700;font-size:18px;letter-spacing:-.01em;line-height:1.3}
   .paper .d{color:var(--ink2);font-size:14px;max-width:60ch}
   .paper .links{margin-top:auto;display:flex;gap:14px;flex-wrap:wrap;font-size:13px}
-  .paper .links a{color:#fff}
+  .paper .links a{color:var(--ink)}
   .paper .links span{color:var(--ink3)}
   /* detail dialog */
   dialog.detail{background:var(--panel);color:var(--ink);border:1px solid var(--line);padding:0;max-width:min(920px,calc(100vw - 32px));width:100%;margin:auto}
@@ -170,8 +181,8 @@
   .dhead{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:28px 28px 18px;border-bottom:1px solid var(--line)}
   .dhead h3{font-size:28px;letter-spacing:-.02em;margin:0}
   .dhead .base{color:var(--ink3);font-size:14px;margin-top:6px}
-  .dclose{background:transparent;color:#fff;border:1px solid var(--line);font:inherit;font-size:14px;padding:8px 12px;cursor:pointer}
-  .dclose:focus-visible{outline:2px solid #fff}
+  .dclose{background:transparent;color:var(--ink);border:1px solid var(--line);font:inherit;font-size:14px;padding:8px 12px;cursor:pointer}
+  .dclose:focus-visible{outline:2px solid var(--ink)}
   .dbody{padding:22px 28px 28px;display:grid;grid-template-columns:1fr 1fr;gap:26px 40px}
   .dbody .full{grid-column:1/-1}
   .kv{display:grid;grid-template-columns:150px 1fr;gap:8px 16px;font-size:14px}
@@ -192,124 +203,180 @@
   .chart rect.bar{transform-origin:left center;transform:scaleX(0);transition:transform .9s cubic-bezier(.22,.61,.36,1)}
   .chart.in rect.bar{transform:scaleX(1)}
   a,button,.card,.chip,.paper{transition:color .15s cubic-bezier(.4,0,.2,1),background-color .15s cubic-bezier(.4,0,.2,1),border-color .15s cubic-bezier(.4,0,.2,1),transform .3s cubic-bezier(.22,.61,.36,1)}
-  .btn:hover{background:#e9e9e9;border-color:#e9e9e9}
-  .btn.ghost:hover{background:#fff;color:#050505}
-  .btn.ghost:hover .gl{background:#050505;color:#fff}
+  .btn:hover{opacity:.88}
+  .btn.ghost:hover{background:var(--ink);color:var(--bg);opacity:1}
+  .btn.ghost:hover .gl{background:var(--bg);color:var(--ink)}
   .card:hover{transform:translateY(-3px)}
   html.pre .hero h1{clip-path:inset(100% 0 -14% 0)}
-  html.pre .hero .lede,html.pre .hero .btn,html.pre .nav .brand,html.pre .nav ul,html.pre .nav .cta,html.pre .scrollhint{opacity:0}
-  @media (prefers-reduced-motion:reduce){html{scroll-snap-type:none}.hero .scrollhint i{animation:none}html.pre .hero h1{clip-path:none}.rv,.hero .lede,.hero .btn{opacity:1;transform:none;animation:none}.rrow .fill,.chart rect.bar{clip-path:none;transform:none;transition:none}}
+  html.pre .hero .lede,html.pre .hero .herobtns,html.pre .hero .proof,html.pre .hero .heroart,html.pre .nav .brand,html.pre .nav ul,html.pre .nav .cta,html.pre .scrollhint{opacity:0}
+
+  /* hero grid + schematic */
+  .herogrid{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+  .herocopy .eyebrow{margin-bottom:22px}
+  .herobtns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:34px}
+  .proof{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;font-size:12.5px;color:var(--ink3);letter-spacing:.04em}
+  .proof b{color:var(--ink2);font-weight:600;letter-spacing:0}
+  .heroart{position:relative;min-height:420px}
+  .heroart svg{width:100%;height:auto;display:block;overflow:visible}
+  .heroart .stat{position:absolute;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(6px);border-color:var(--line);color:var(--ink);font-weight:600;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+  .heroart .s1{left:0;top:2%} .heroart .s2{right:0;top:2%} .heroart .s5{right:2%;bottom:4%}
+  .heroart .stat{animation:float 6s ease-in-out infinite} .heroart .s2{animation-delay:-1.5s}.heroart .s3{animation-delay:-3s}.heroart .s4{animation-delay:-4.5s}.heroart .s5{animation-delay:-2.2s}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  #schematic .ln{fill:none;stroke:var(--ink);opacity:.28;stroke-width:1}
+  #schematic .flow{fill:none;stroke:var(--ink);stroke-width:1.2;stroke-dasharray:4 10;animation:dash 2.6s linear infinite;opacity:.9}
+  #schematic .flow.slow{animation-duration:5s;stroke-dasharray:2 14;opacity:.5}
+  #schematic .node{fill:var(--bg);stroke:var(--ink);stroke-width:1.1}
+  #schematic .node.dim{opacity:.45}
+  #schematic .core{fill:var(--ink)}
+  #schematic text{fill:var(--ink);font-family:var(--sans);font-size:11px;letter-spacing:.02em}
+  #schematic text.k{fill:var(--ink3);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase}
+  #schematic .ring{fill:none;stroke:var(--ink);opacity:.2;stroke-width:.8}
+  #schematic .ring.spin{transform-origin:center;animation:spin 60s linear infinite;stroke-dasharray:1 5}
+  #schematic .ring.spin2{animation-duration:90s;animation-direction:reverse;stroke-dasharray:3 9}
+  #schematic .pulse{fill:var(--ink);animation:pulse 2.4s ease-out infinite;transform-origin:center}
+  #schematic .tick{stroke:var(--ink);opacity:.35;stroke-width:1}
+  @keyframes dash{to{stroke-dashoffset:-56}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes pulse{0%{opacity:1;r:2}100%{opacity:0;r:14}}
+  /* stack diagram */
+  .stackwrap{border:1px solid var(--line);background:var(--bg);padding:26px 18px;overflow-x:auto}
+  #stackdiag{width:100%;min-width:900px;height:auto;display:block}
+  #stackdiag .lane{fill:none;stroke:var(--line);stroke-width:1}
+  #stackdiag .link{fill:none;stroke:var(--ink);opacity:.22;stroke-width:1}
+  #stackdiag .link.hot{stroke:var(--ink);opacity:1;stroke-width:1.2;stroke-dasharray:3 9;animation:dash 3s linear infinite}
+  #stackdiag .box{fill:var(--panel);stroke:var(--ink3);stroke-width:1}
+  #stackdiag .box.ours{stroke:var(--ink)}
+  #stackdiag .box.bench{stroke:var(--ink2);stroke-dasharray:3 3}
+  #stackdiag text{fill:var(--ink);font-family:var(--sans);font-size:12px}
+  #stackdiag text.sub{fill:var(--ink3);font-size:10.5px}
+  #stackdiag text.lane{fill:var(--ink3);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+  #stackdiag .dot{fill:var(--ink)}
+  @media (max-width:1000px){.herogrid{grid-template-columns:1fr}.heroart{min-height:0;margin-top:10px}.heroart .stat{position:static;display:inline-flex;margin:6px 8px 0 0;animation:none}}
+  @media (prefers-reduced-motion:reduce){#schematic .flow,#schematic .ring.spin,#schematic .pulse,#stackdiag .link.hot,.heroart .stat{animation:none}}
+  @media (prefers-reduced-motion:reduce){html{scroll-snap-type:none}.hero .scrollhint i{animation:none}html.pre .hero h1{clip-path:none}.rv,.hero .lede,.hero .herobtns,.hero .proof,.hero .heroart{opacity:1;transform:none;animation:none}.rrow .fill,.chart rect.bar{clip-path:none;transform:none;transition:none}}
 
 </style>
 
 <header class="top"><div class="wrap nav">
   <a class="brand" href="#top"><img src="assets/logo.png" alt="Palette"><span>models</span></a>
-  <ul><li><a href="#models">Models</a></li><li><a href="#benchmarks">Benchmarks</a></li><li><a href="#ram">Footprint</a></li><li><a href="#research">Research</a></li><li><a href="#method">Method</a></li></ul>
-  <a class="btn cta" href="https://huggingface.co/palette-lab"><span class="gl">»</span>Hugging Face</a>
+  <ul><li><a href="#models" data-i18n="Models">Models</a></li><li><a href="#benchmarks" data-i18n="Benchmarks">Benchmarks</a></li><li><a href="#ram" data-i18n="Footprint">Footprint</a></li><li><a href="#research" data-i18n="Research">Research</a></li><li><a href="#stack" data-i18n="Stack">Stack</a></li><li><a href="#method" data-i18n="Why Palette">Why Palette</a></li></ul>
+  <div class="ctrls"><div class="lang" role="group" aria-label="Language"><button type="button" data-lang="ko" aria-pressed="true">KO</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="ja" aria-pressed="false">JA</button></div><button class="theme" id="themebtn" type="button" aria-label="Toggle light and dark"><span class="sun">☀</span><span class="moon">☾</span></button></div>
+  <a class="btn cta" href="mailto:hanish@pltt.xyz?subject=Palette%20models"><span class="gl">»</span><span data-i18n="Connect">Connect</span></a>
 </div></header>
 
 <section class="hero" id="top">
   <canvas id="poly" aria-hidden="true"></canvas>
   <div class="veil" aria-hidden="true"></div>
-  <div class="wrap">
-    <h1>Korean-first models built to run where the work is.</h1>
-    <p class="lede"><b>Open weights</b><span class="dot">·</span><b>On the device or in your rack</b><span class="dot">·</span><b>Every number from a public scorer</b><span class="dot">·</span>No claim without a date, a benchmark and a comparator in the same table.</p>
-    <a class="btn" href="#models"><span class="gl">»</span>Explore the models</a>
+  <div class="wrap herogrid">
+    <div class="herocopy">
+      <div class="eyebrow" data-i18n="Palette · Seoul and Bengaluru · 2026">Palette · Seoul and Bengaluru · 2026</div>
+      <h1 data-i18n="Korea's #1 on-device AI. Built by Palette.">Korea's #1 on-device AI. Built by Palette.</h1>
+      <p class="lede" data-i18n-html="lede">…</p>
+      <div class="herobtns"><a class="btn" href="#models"><span class="gl">»</span><span data-i18n="Explore the models">Explore the models</span></a><a class="btn ghost" href="mailto:hanish@pltt.xyz?subject=Palette%20models"><span class="gl">»</span><span data-i18n="Connect">Connect</span></a></div>
+      <div class="proof"><span data-i18n="Measured against">Measured against</span><b>Kakao Kanana</b><b>LG EXAONE</b><b>Naver HyperCLOVA X</b><b>Alibaba Qwen</b><b>Seedream</b><b>GPT-Image</b><b>Cohere</b></div>
+    </div>
+    <div class="heroart" aria-hidden="true">
+      <svg id="schematic" viewBox="0 0 760 600" role="img" aria-label="Palette model stack schematic"></svg>
+      <div class="chip stat s1"><i></i><span data-i18n="82.2 % call accuracy">82.2 % call accuracy</span></div>
+      <div class="chip stat s2"><i></i><span data-i18n="505 MB on a phone">505 MB on a phone</span></div>
+            <div class="chip stat s5"><i></i><span data-i18n="0 won per token">0 won per token</span></div>
+    </div>
   </div>
-  <div class="scrollhint" aria-hidden="true"><span>Scroll</span><i></i></div>
+  <div class="scrollhint" aria-hidden="true"><span data-i18n="Scroll">Scroll</span><i></i></div>
 </section>
 
 <section>
   <div class="wrap benefits">
     <div>
-      <div class="bigstat"><div class="n">82.2<span style="font-size:.4em;color:var(--ink3);font-weight:600"> %</span></div><div class="l">Songgot-X 0.8B, Korean tool-call accuracy on FunctionChat-Bench SingleCall. Highest of every model measured, including Kakao's Kanana-2 (73.2).</div></div>
-      <div class="bigstat"><div class="n">505<span style="font-size:.4em;color:var(--ink3);font-weight:600"> MB</span></div><div class="l">The whole model, quantized, running inside a browser tab or a phone. 12 KB of context memory per token.</div></div>
-      <div class="bigstat"><div class="n">16</div><div class="l">Model lines built since August 2026: language, documents, images, video, try-on, speech. Nine published, seven more measured and coming.</div></div>
+      <div class="bigstat"><div class="n">82.2<span style="font-size:.4em;color:var(--ink3);font-weight:600"> %</span></div><div class="l" data-i18n="stat1">…</div></div>
+      <div class="bigstat"><div class="n">505<span style="font-size:.4em;color:var(--ink3);font-weight:600"> MB</span></div><div class="l" data-i18n="stat2">…</div></div>
+      <div class="bigstat"><div class="n">16</div><div class="l" data-i18n="stat3">…</div></div>
     </div>
     <div class="rows">
-      <div class="brow"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5"/></svg><div><h3>Open weights, Apache 2.0</h3><p>Download, run offline, ship inside your product. No per-token meter, no data leaving the device.</p></div></div>
-      <div class="brow"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h6M9 11h6M9 15h3"/></svg><div><h3>Korean enterprise work, not trivia</h3><p>Tool calls in Korean, 공문서 and 품의서 drafting, meeting minutes to decisions, KDoc tables, Hangul inside generated images and video.</p></div></div>
-      <div class="brow"><svg viewBox="0 0 24 24"><path d="M4 18h16M6 14V8M10 14V5M14 14v-4M18 14V9"/></svg><div><h3>Measured in public</h3><p>Exact match, character error rate, field-F1: scorers you can run yourself, with the strongest Korean and frontier models in the same table.</p></div></div>
+      <div class="brow"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5"/></svg><div><h3 data-i18n="Open weights, Apache 2.0">Open weights, Apache 2.0</h3><p data-i18n="ben1">…</p></div></div>
+      <div class="brow"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h6M9 11h6M9 15h3"/></svg><div><h3 data-i18n="Korean enterprise work, not trivia">Korean enterprise work, not trivia</h3><p data-i18n="ben2">…</p></div></div>
+      <div class="brow"><svg viewBox="0 0 24 24"><path d="M4 18h16M6 14V8M10 14V5M14 14v-4M18 14V9"/></svg><div><h3 data-i18n="Measured in public">Measured in public</h3><p data-i18n="ben3">…</p></div></div>
     </div>
   </div>
 </section>
 
 <section id="ladder">
   <div class="wrap">
-    <div class="sechead"><div><div class="eyebrow">Device ladder</div><h2>How far down the device ladder do Palette models reach?</h2></div><p class="sub">From a browser tab to a server rack: which Palette model runs at each tier today, with the file you actually download.</p></div>
+    <div class="sechead"><div><div class="eyebrow" data-i18n="Device ladder">Device ladder</div><h2 data-i18n="How far down the device ladder do Palette models reach?">How far down the device ladder do Palette models reach?</h2></div><p class="sub" data-i18n="From a browser tab to a server rack: which Palette model runs at each tier today, with the file you actually download.">From a browser tab to a server rack: which Palette model runs at each tier today, with the file you actually download.</p></div>
     <div class="ladder">
-      <div><div class="t">Browser tab</div><div class="r">50–800 MB · CPU or WebGPU · phones and laptops</div><div class="m"><span class="chip"><i></i>Songgot 12L · 54 MB</span><span class="chip"><i></i>Songgot-X 0.8B · 505 MB</span><span class="chip dim"><i></i>Pocket, Chrome extension</span></div></div>
-      <div><div class="t">Laptop</div><div class="r">8–64 GB · Apple silicon, one GPU</div><div class="m"><span class="chip"><i></i>Songgot-X 0.8B · tools</span><span class="chip"><i></i>Palette STT v1c · 3.4 GB</span><span class="chip dim"><i></i>Palette Desktop</span></div></div>
-      <div><div class="t">Workstation</div><div class="r">24–80 GB · one H100 class card</div><div class="m"><span class="chip"><i></i>Palette-K-Midm 11.5B · 23 GB</span><span class="chip"><i></i>Palette-K-14B · 29 GB</span><span class="chip"><i></i>Palette-K-Image 8B-MoT · 36 GB</span></div></div>
-      <div><div class="t">Server</div><div class="r">80 GB+ · multi-GPU, hosted API</div><div class="m"><span class="chip"><i></i>Palette-K-Doc pipeline · 27B</span><span class="chip"><i></i>Palette-K-Video · H3 33B, API</span><span class="chip dim"><i></i>Modal, KR/SG regions</span></div></div>
+      <div><div class="t" data-i18n="Phone, offline">Phone, offline</div><div class="r" data-i18n="50–800 MB · no server, no signal needed · Android and desktop browsers">50–800 MB · no server, no signal needed · Android and desktop browsers</div><div class="m"><span class="chip"><i></i>Songgot 12L · 54 MB</span><span class="chip"><i></i>Songgot-X 0.8B · 505 MB</span><span class="chip dim"><i></i><span data-i18n="Songgot Pocket: mobile offline LLM">Songgot Pocket: mobile offline LLM</span></span></div></div>
+      <div><div class="t" data-i18n="Laptop">Laptop</div><div class="r" data-i18n="8–64 GB · Apple silicon, one GPU">8–64 GB · Apple silicon, one GPU</div><div class="m"><span class="chip"><i></i>Songgot-X 0.8B · tools</span><span class="chip"><i></i>Palette STT v1c · 3.4 GB</span><span class="chip dim"><i></i><span data-i18n="Palette Desktop">Palette Desktop</span></span></div></div>
+      <div><div class="t" data-i18n="Workstation">Workstation</div><div class="r" data-i18n="24–80 GB · one H100 class card">24–80 GB · one H100 class card</div><div class="m"><span class="chip"><i></i>Palette-K-Midm 11.5B · 23 GB</span><span class="chip"><i></i>Palette-K-14B · 29 GB</span><span class="chip"><i></i>Palette-K-Image 8B-MoT · 36 GB</span></div></div>
+      <div><div class="t" data-i18n="Server">Server</div><div class="r" data-i18n="80 GB+ · multi-GPU, hosted API">80 GB+ · multi-GPU, hosted API</div><div class="m"><span class="chip"><i></i>Palette-K-Doc pipeline · 27B</span><span class="chip"><i></i>Palette-K-Video · H3 33B, API</span><span class="chip dim"><i></i><span data-i18n="Modal, KR/SG regions">Modal, KR/SG regions</span></span></div></div>
     </div>
   </div>
 </section>
 
 <section id="ram">
   <div class="wrap">
-    <div class="sechead"><div><div class="eyebrow">Footprint</div><h2>Parameter count is not the same thing as RAM.</h2></div><a class="btn ghost" href="#models"><span class="gl">»</span>See the models</a></div>
-    <div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-tab="lang">Language, on device</button><button role="tab" aria-selected="false" data-tab="big">Language, workstation</button><button role="tab" aria-selected="false" data-tab="other">Vision, speech, image</button></div>
+    <div class="sechead"><div><div class="eyebrow">Footprint</div><h2 data-i18n="Parameter count is not the same thing as RAM.">Parameter count is not the same thing as RAM.</h2></div><a class="btn ghost" href="#models"><span class="gl">»</span><span data-i18n="See the models">See the models</span></a></div>
+    <div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-tab="lang" data-i18n="Language, on device">Language, on device</button><button role="tab" aria-selected="false" data-tab="big" data-i18n="Language, workstation">Language, workstation</button><button role="tab" aria-selected="false" data-tab="other" data-i18n="Vision, speech, image">Vision, speech, image</button></div>
     <div class="ram" id="ramgrid"></div>
-    <p class="note">Bars are the size of the file you load, as published: quantized GGUF for the on-device rows, bf16 safetensors for the rest (2 bytes per parameter). Context memory is extra and grows per token; Songgot-X keeps 12 KB per token at fp16 and 6.4 KB at q8_0 because only 6 of its 24 layers hold a growing cache.</p>
+    <p class="note" data-i18n="ramnote">…</p>
   </div>
 </section>
 
 <section id="benchmarks">
   <div class="wrap">
-    <div class="sechead"><div><div class="eyebrow">Benchmarks</div><h2>Every model, the number it was measured to, next to what it was measured against.</h2></div><p class="sub">Hover a bar for the exact figure. White bars are Palette models. Each chart names its benchmark, scorer, item count and date.</p></div>
+    <div class="sechead"><div><div class="eyebrow">Benchmarks</div><h2 data-i18n="Every model, the number it was measured to, next to what it was measured against.">Every model, the number it was measured to, next to what it was measured against.</h2></div><p class="sub" data-i18n="Hover a bar for the exact figure. White bars are Palette models. Each chart names its benchmark, scorer, item count and date.">Hover a bar for the exact figure. White bars are Palette models. Each chart names its benchmark, scorer, item count and date.</p></div>
     <div class="charts" id="charts"></div>
   </div>
 </section>
 
 <section id="models">
   <div class="wrap">
-    <div class="sechead"><div><div class="eyebrow">The family</div><h2>A family of models. One engineering discipline.</h2></div><a class="btn ghost" href="#specs"><span class="gl">»</span>All models and specs</a></div>
+    <div class="sechead"><div><div class="eyebrow" data-i18n="The family">The family</div><h2 data-i18n="A family of models. One engineering discipline.">A family of models. One engineering discipline.</h2></div><a class="btn ghost" href="#specs"><span class="gl">»</span><span data-i18n="All models and specs">All models and specs</span></a></div>
     <div class="cards" id="cards"></div>
   </div>
 </section>
 
 <section id="specs">
   <div class="wrap">
-    <div class="sechead"><div><div class="eyebrow">Specs</div><h2>All models and specs</h2></div></div>
-    <div class="tabs" role="tablist" id="spectabs"><button role="tab" aria-selected="true" data-tab="all">All</button><button role="tab" aria-selected="false" data-tab="lang">Language</button><button role="tab" aria-selected="false" data-tab="vision">Documents &amp; vision</button><button role="tab" aria-selected="false" data-tab="media">Image, video, try-on</button><button role="tab" aria-selected="false" data-tab="speech">Speech</button></div>
-    <div class="tblwrap"><table id="spectable"><thead><tr><th>Model</th><th>Base</th><th>Params</th><th>File</th><th>Benchmark</th><th>Score</th><th>Licence</th><th>Status</th></tr></thead><tbody></tbody></table></div>
-    <p class="note">Status: <b>published</b> = weights on Hugging Face today; <b>measured</b> = scored, release coming; <b>api</b> = available as a hosted API; <b>system</b> = a Palette pipeline over an open base.</p>
+    <div class="sechead"><div><div class="eyebrow" data-i18n="Specs">Specs</div><h2 data-i18n="All models and specs">All models and specs</h2></div></div>
+    <div class="tabs" role="tablist" id="spectabs"><button role="tab" aria-selected="true" data-tab="all" data-i18n="All">All</button><button role="tab" aria-selected="false" data-tab="lang" data-i18n="Language">Language</button><button role="tab" aria-selected="false" data-tab="vision" data-i18n="Documents &amp; vision">Documents &amp; vision</button><button role="tab" aria-selected="false" data-tab="media" data-i18n="Image, video, try-on">Image, video, try-on</button><button role="tab" aria-selected="false" data-tab="speech" data-i18n="Speech">Speech</button></div>
+    <div class="tblwrap"><table id="spectable"><thead><tr><th data-i18n="Model">Model</th><th data-i18n="Base">Base</th><th data-i18n="Params">Params</th><th data-i18n="File">File</th><th data-i18n="Benchmark">Benchmark</th><th data-i18n="Score">Score</th><th data-i18n="Licence">Licence</th><th data-i18n="Status">Status</th></tr></thead><tbody></tbody></table></div>
+    <p class="note" data-i18n-html="statusnote">…</p>
   </div>
 </section>
 
 
 <section id="research">
   <div class="wrap">
-    <div class="sechead"><div><div class="eyebrow">Research</div><h2>Papers, benchmarks and the sweeps behind every claim.</h2></div><p class="sub">Published work links out. Reports in preparation already have their numbers on this page.</p></div>
+    <div class="sechead"><div><div class="eyebrow">Research</div><h2 data-i18n="Papers, benchmarks and the sweeps behind every claim.">Papers, benchmarks and the sweeps behind every claim.</h2></div><p class="sub" data-i18n="Published work links out. Reports in preparation already have their numbers on this page.">Published work links out. Reports in preparation already have their numbers on this page.</p></div>
     <div class="papers" id="papers"></div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="sechead"><div><div class="eyebrow" data-i18n="The stack">The stack</div><h2 data-i18n="One pipeline from Korean data to the device in your pocket.">One pipeline from Korean data to the device in your pocket.</h2></div><p class="sub" data-i18n="Palette's own teacher writes the training data, every model is scored on public benchmarks before it ships, and the same weights run in the browser, on the laptop and in the rack.">Palette's own teacher writes the training data, every model is scored on public benchmarks before it ships, and the same weights run in the browser, on the laptop and in the rack.</p></div>
+    <div class="stackwrap"><svg id="stackdiag" viewBox="0 0 1400 620" role="img" aria-label="Palette pipeline: data, teacher, models, benchmarks, products"></svg></div>
   </div>
 </section>
 
 <section id="method">
   <canvas id="knot" aria-hidden="true"></canvas>
   <div class="wrap closing">
-    <div><div class="eyebrow">Why Palette</div><h2>AI that Korean work can actually run on.</h2><p class="sub">Tool calls on a phone, documents on a workstation, video in the cloud. One family, Korean-first, open where it can be, measured everywhere.</p></div>
-    <ul class="rules">
-      <li><b>1</b><span><b>Number one in Korean on-device tool calling.</b> Songgot-X leads every measured model, including the two built by Korea's largest AI labs, and it fits in a browser tab.</span></li>
-      <li><b>2</b><span><b>A 14B that beats a 32B.</b> Palette-K-14B and Palette-K-Midm lead PALETTE-BENCH-KO on Korean enterprise documents ahead of Qwen, Kakao and Naver models twice their size.</span></li>
-      <li><b>3</b><span><b>Best open Korean speech on mixed-language audio.</b> Palette STT leads the HiKE code-switch benchmark among open systems.</span></li>
-      <li><b>4</b><span><b>Korean text that survives generation.</b> Hangul inside images, video and try-on photos, verified by OCR before it ships.</span></li>
-      <li><b>5</b><span><b>Runs where your data is.</b> Offline on the device, on-prem in your rack, or hosted in Korea and Singapore. Apache 2.0 on every published weight.</span></li>
-    </ul>
+    <div><div class="eyebrow">Why Palette</div><h2 data-i18n="AI that Korean work can actually run on.">AI that Korean work can actually run on.</h2><p class="sub" data-i18n="Tool calls on a phone, documents on a workstation, video in the cloud. One family, Korean-first, open where it can be, measured everywhere.">Tool calls on a phone, documents on a workstation, video in the cloud. One family, Korean-first, open where it can be, measured everywhere.</p></div>
+    <ul class="rules"><li><b>1</b><span data-i18n-html="rule1">…</span></li><li><b>2</b><span data-i18n-html="rule2">…</span></li><li><b>3</b><span data-i18n-html="rule3">…</span></li><li><b>4</b><span data-i18n-html="rule4">…</span></li><li><b>5</b><span data-i18n-html="rule5">…</span></li></ul>
   </div>
 </section>
 
 <footer class="wrap">
   <div class="fgrid">
-    <div><a class="brand" href="#top"><img src="assets/logo.png" alt="Palette"><span>models</span></a><p style="margin:14px 0 0;max-width:34ch;color:var(--ink2)">Korean-first models for the device and the rack, every one scored in public before it ships.</p></div>
-    <div><h4>Models</h4><ul><li><a href="https://huggingface.co/palette-lab/songgot-x-0.8b">Songgot-X 0.8B</a></li><li><a href="https://huggingface.co/palette-lab/songgot-12l">Songgot 12L</a></li><li><a href="https://huggingface.co/palette-lab/palette-k-midm">Palette-K-Midm</a></li><li><a href="https://huggingface.co/palette-lab/palette-k-14b">Palette-K-14B</a></li><li><a href="https://huggingface.co/palette-lab">All on Hugging Face</a></li></ul></div>
-    <div><h4>Benchmarks</h4><ul><li><a href="https://huggingface.co/datasets/palette-lab/palette-bench-ko">PALETTE-BENCH-KO</a></li><li><a href="https://github.com/hanishkeloth/songgot">FunctionChat exact-match scorer</a></li><li><a href="https://hanishkeloth.github.io/songgot">Songgot paper</a></li><li><a href="https://huggingface.co/datasets/palette-lab/songgot-tools-ko">songgot-tools-ko data</a></li></ul></div>
-    <div><h4>Run it</h4><ul><li><a href="https://hanishkeloth.github.io/songgot/app/">Songgot Pocket (browser)</a></li><li><a href="https://www.pltt.xyz">Palette OS</a></li><li><a href="https://github.com/hanishkeloth">GitHub</a></li></ul></div>
+    <div><a class="brand" href="#top"><img src="assets/logo.png" alt="Palette"><span>models</span></a><p style="margin:14px 0 0;max-width:34ch;color:var(--ink2)" data-i18n="footer1">…</p></div>
+    <div><h4>Models</h4><ul><li><a href="https://huggingface.co/palette-lab/songgot-x-0.8b">Songgot-X 0.8B</a></li><li><a href="https://huggingface.co/palette-lab/songgot-12l">Songgot 12L</a></li><li><a href="https://huggingface.co/palette-lab/palette-k-midm">Palette-K-Midm</a></li><li><a href="https://huggingface.co/palette-lab/palette-k-14b">Palette-K-14B</a></li><li><a href="https://huggingface.co/palette-lab" data-i18n="All on Hugging Face">All on Hugging Face</a></li></ul></div>
+    <div><h4>Benchmarks</h4><ul><li><a href="https://huggingface.co/datasets/palette-lab/palette-bench-ko">PALETTE-BENCH-KO</a></li><li><a href="https://github.com/hanishkeloth/songgot" data-i18n="FunctionChat exact-match scorer">FunctionChat exact-match scorer</a></li><li><a href="https://hanishkeloth.github.io/songgot" data-i18n="Songgot paper">Songgot paper</a></li><li><a href="https://huggingface.co/datasets/palette-lab/songgot-tools-ko" data-i18n="songgot-tools-ko data">songgot-tools-ko data</a></li></ul></div>
+    <div><h4 data-i18n="Run it">Run it</h4><ul><li><a href="https://hanishkeloth.github.io/songgot/app/" data-i18n="Songgot Pocket (browser)">Songgot Pocket (browser)</a></li><li><a href="https://www.pltt.xyz">Palette OS</a></li><li><a href="https://github.com/hanishkeloth">GitHub</a></li></ul></div>
   </div>
-  <div class="fbot"><span>© 2026 Palette. Apache 2.0 on every published weight. Answers are generated by an AI model (AI 기본법 labelling).</span><span>Numbers dated 2026-09-17.</span></div>
+  <div class="fbot"><span data-i18n="footer2">…</span><span data-i18n="footer3">…</span></div>
 </footer>
-<dialog class="detail" id="detail"><div class="dhead"><div><h3 id="dname"></h3><div class="base" id="dbase"></div></div><button class="dclose" id="dclose" type="button">Close</button></div><div class="dbody" id="dbody"></div></dialog>
+<dialog class="detail" id="detail"><div class="dhead"><div><h3 id="dname"></h3><div class="base" id="dbase"></div></div><button class="dclose" id="dclose" type="button" data-i18n="Close">Close</button></div><div class="dbody" id="dbody"></div></dialog>
 <div class="tip" id="tip" role="status" aria-live="polite"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -383,6 +450,8 @@ const SPECS = [
   ["PALETTE-VOICE-KO (TTS bench)","Qwen3-TTS-1.7B, untrained","1.7B","3.4 GB bf16","Korean numerals recall","0.879","Apache 2.0 base","system","speech",""]
 ];
 
+// ---------- i18n lookup (dictionaries at the end of the file; English is the key) ----------
+window.__lang=localStorage.getItem("pm.lang")||"ko"; const t=(k)=>{const d=window.T&&window.T[window.__lang];return (d&&d[k])||k};
 // ---------- helpers ----------
 const $=(s,r=document)=>r.querySelector(s); const el=(t,c,h)=>{const e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e};
 const tip=$("#tip"); function showTip(e,t){tip.textContent=t;tip.style.left=e.clientX+"px";tip.style.top=e.clientY+"px";tip.classList.add("on")} function hideTip(){tip.classList.remove("on")}
@@ -395,34 +464,34 @@ document.querySelectorAll('#ram .tabs button').forEach(b=>b.addEventListener('cl
 ram("lang");
 
 // charts: horizontal bars in SVG, one scale, labels inside the viewBox
-function chart(c){const box=el("div","chart"+(c.wide?" wide":""));box.innerHTML=`<h3>${c.title}</h3><p class="meta">${c.meta}</p>`;
+function chart(c){const box=el("div","chart"+(c.wide?" wide":""));box.innerHTML=`<h3>${t(c.title)}</h3><p class="meta">${t(c.meta)}</p>`;
   const rows=c.rows, W=1400, rowH=36, left=Math.min(470,W*.34), right=110, H=rows.length*rowH+8, scale=(W-left-right)/c.max;
   const NS="http://www.w3.org/2000/svg"; const svg=document.createElementNS(NS,"svg"); svg.setAttribute("viewBox",`0 0 ${W} ${H}`); svg.setAttribute("role","img"); svg.setAttribute("aria-label",c.title);
   const ticks=c.max>=100?[0,25,50,75,100]:c.max===1?[0,.25,.5,.75,1]:c.max===6?[0,2,4,6]:[0,c.max/2,c.max];
-  ticks.forEach(t=>{const x=left+t*scale;const l=document.createElementNS(NS,"line");l.setAttribute("x1",x);l.setAttribute("x2",x);l.setAttribute("y1",0);l.setAttribute("y2",H-8);l.setAttribute("stroke","#1f1f1f");l.setAttribute("stroke-width","1");svg.appendChild(l)});
+  ticks.forEach(t=>{const x=left+t*scale;const l=document.createElementNS(NS,"line");l.setAttribute("x1",x);l.setAttribute("x2",x);l.setAttribute("y1",0);l.setAttribute("y2",H-8);l.setAttribute("class","grid");l.setAttribute("stroke-width","1");svg.appendChild(l)});
   rows.forEach((r,i)=>{const [name,v,ours]=r;const y=i*rowH;const g=document.createElementNS(NS,"g");
-    const t=document.createElementNS(NS,"text");t.setAttribute("x",left-14);t.setAttribute("y",y+21);t.setAttribute("text-anchor","end");t.setAttribute("fill",ours?"#fff":"rgba(255,255,255,.72)");t.setAttribute("font-size","15");t.setAttribute("font-weight",ours?"600":"400");t.textContent=name.length>60?name.slice(0,58)+"…":name;g.appendChild(t);
-    const w=Math.max(3,v*scale);const rect=document.createElementNS(NS,"rect");rect.setAttribute("x",left);rect.setAttribute("y",y+6);rect.setAttribute("width",w);rect.setAttribute("height",rowH-14);rect.setAttribute("fill",ours?"#ffffff":"#3d3d3d");rect.setAttribute("class","bar");g.appendChild(rect);
-    const val=document.createElementNS(NS,"text");val.setAttribute("x",left+w+10);val.setAttribute("y",y+21);val.setAttribute("fill",ours?"#fff":"rgba(255,255,255,.72)");val.setAttribute("font-size","15");val.setAttribute("font-weight","600");val.setAttribute("font-variant-numeric","tabular-nums");val.textContent=(c.dec!=null?v.toFixed(c.dec):v.toFixed(1))+(c.unit||"");g.appendChild(val);
+    const t=document.createElementNS(NS,"text");t.setAttribute("x",left-14);t.setAttribute("y",y+21);t.setAttribute("text-anchor","end");t.setAttribute("class",ours?"lbl ours":"lbl");t.setAttribute("font-size","15");t.setAttribute("font-weight",ours?"600":"400");t.textContent=name.length>60?name.slice(0,58)+"…":name;g.appendChild(t);
+    const w=Math.max(3,v*scale);const rect=document.createElementNS(NS,"rect");rect.setAttribute("x",left);rect.setAttribute("y",y+6);rect.setAttribute("width",w);rect.setAttribute("height",rowH-14);rect.setAttribute("class","bar "+(ours?"ours":"cmp"));g.appendChild(rect);
+    const val=document.createElementNS(NS,"text");val.setAttribute("x",left+w+10);val.setAttribute("y",y+21);val.setAttribute("class",ours?"lbl ours":"lbl");val.setAttribute("font-size","15");val.setAttribute("font-weight","600");val.setAttribute("font-variant-numeric","tabular-nums");val.textContent=(c.dec!=null?v.toFixed(c.dec):v.toFixed(1))+(c.unit||"");g.appendChild(val);
     const hit=document.createElementNS(NS,"rect");hit.setAttribute("x",0);hit.setAttribute("y",y);hit.setAttribute("width",W);hit.setAttribute("height",rowH);hit.setAttribute("fill","transparent");
     hit.addEventListener("mousemove",e=>showTip(e,`${name}: ${(c.dec!=null?v.toFixed(c.dec):v.toFixed(1))}${c.unit||""}${c.lower?" (lower is better)":""}`));hit.addEventListener("mouseleave",hideTip);g.appendChild(hit);svg.appendChild(g)});
   box.appendChild(svg);
-  box.appendChild(el("div","legend",`<span><i style="background:#fff"></i>Palette</span><span><i style="background:#3d3d3d"></i>comparators</span>${c.lower?'<span>↓ lower is better</span>':''}`));
-  box.appendChild(el("p","cap",c.cap));return box}
-const cg=$("#charts");CHARTS.forEach(c=>cg.appendChild(chart(c)));
+  box.appendChild(el("div","legend",`<span><i style="background:var(--bar-ours)"></i>Palette</span><span><i style="background:var(--bar)"></i>${t("comparators")}</span>${c.lower?`<span>↓ ${t("lower is better")}</span>`:""}`));
+  box.appendChild(el("p","cap",t(c.cap)));return box}
+function renderCharts(){const cg=$("#charts");cg.innerHTML="";CHARTS.forEach(c=>cg.appendChild(chart(c)))} renderCharts();
 
 // cards with line art
-function art(cv,kind,seed){const dpr=window.devicePixelRatio||1;const w=cv.clientWidth||300,h=96;cv.width=w*dpr;cv.height=h*dpr;const x=cv.getContext("2d");x.scale(dpr,dpr);x.strokeStyle="rgba(255,255,255,.85)";x.lineWidth=.8;const cx=w/2,cy=h*1.05,R=h*.9;
+function art(cv,kind,seed){const dpr=window.devicePixelRatio||1;const w=cv.clientWidth||300,h=96;cv.width=w*dpr;cv.height=h*dpr;const x=cv.getContext("2d");x.scale(dpr,dpr);x.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue("--ink").trim()||"#fff";x.globalAlpha=.85;x.lineWidth=.8;const cx=w/2,cy=h*1.05,R=h*.9;
   if(kind==="rose"){for(let k=0;k<7;k++){x.beginPath();for(let a=0;a<=Math.PI;a+=.02){const r=R*Math.cos((k+2)*a*.5+seed);const px=cx+r*Math.cos(a),py=cy-Math.abs(r*Math.sin(a));a===0?x.moveTo(px,py):x.lineTo(px,py)}x.stroke()}}
   if(kind==="petal"){for(let k=0;k<12;k++){x.beginPath();x.ellipse(cx,cy,R*.9,R*.28,k*Math.PI/12+seed,Math.PI,2*Math.PI);x.stroke()}}
   if(kind==="ring"){for(let k=1;k<=6;k++){x.beginPath();x.arc(cx,cy,R*k/6,Math.PI,2*Math.PI);x.stroke()}}
   if(kind==="arc"){for(let k=0;k<9;k++){x.beginPath();x.arc(cx-R*.5+k*R*.125,cy,R*.5,Math.PI,2*Math.PI);x.stroke()}}
   if(kind==="grid"){for(let k=0;k<=10;k++){x.beginPath();x.moveTo(cx-R+k*R*.2,cy-R*.95);x.lineTo(cx-R+k*R*.2,cy);x.stroke();x.beginPath();x.moveTo(cx-R,cy-k*R*.095);x.lineTo(cx+R,cy-k*R*.095);x.stroke()}}
   if(kind==="wave"){for(let k=0;k<5;k++){x.beginPath();for(let i=0;i<=w;i+=3){const yy=cy-R*.35-k*10-Math.sin(i/22+k+seed)*(10+k*2)*Math.sin(i/w*Math.PI);i===0?x.moveTo(i,yy):x.lineTo(i,yy)}x.stroke()}}}
-const cards=$("#cards");CARDS.forEach((c,i)=>{const a=el("a","card");a.href=c.href;a.innerHTML=`<span class="st ${c.st==="published"?"pub":""}">${c.st}</span><canvas aria-hidden="true"></canvas><div class="name">${c.name}</div><div class="base">${c.base}</div><div class="num">${c.num}<small>${c.unit}</small></div>`;cards.appendChild(a);requestAnimationFrame(()=>art(a.querySelector("canvas"),c.art,i*.7))});
+function renderCards(){const cards=$("#cards");cards.innerHTML="";CARDS.forEach((c,i)=>{const a=el("a","card");a.href=c.href;a.innerHTML=`<span class="st ${c.st==="published"?"pub":""}">${t(c.st)}</span><canvas aria-hidden="true"></canvas><div class="name">${c.name}</div><div class="base">${t(c.base)}</div><div class="num">${c.num}<small>${t(c.unit)}</small></div>`;a.addEventListener("click",e=>{if(DETAIL[c.name]){e.preventDefault();openDetail(c.name)}});cards.appendChild(a);requestAnimationFrame(()=>art(a.querySelector("canvas"),c.art,i*.7))})} 
 
 // spec table with tabs
-function specs(tab){const tb=$("#spectable tbody");tb.innerHTML="";SPECS.filter(r=>tab==="all"||r[8]===tab).forEach(r=>{const tr=el("tr","ours");tr.innerHTML=`<td>${r[9]?`<a href="${r[9]}">${r[0]}</a>`:r[0]}</td><td>${r[1]}</td><td class="n">${r[2]}</td><td class="n">${r[3]}</td><td>${r[4]}</td><td class="n">${r[5]}</td><td>${r[6]}</td><td><span class="stat ${r[7]==="published"?"pub":""}">${r[7]}</span></td>`;tb.appendChild(tr)})}
+function specs(tab){const tb=$("#spectable tbody");tb.innerHTML="";SPECS.filter(r=>tab==="all"||r[8]===tab).forEach(r=>{const tr=el("tr","ours");tr.innerHTML=`<td>${r[9]?`<a href="${r[9]}">${r[0]}</a>`:r[0]}</td><td>${r[1]}</td><td class="n">${r[2]}</td><td class="n">${r[3]}</td><td>${r[4]}</td><td class="n">${r[5]}</td><td>${r[6]}</td><td><span class="stat ${r[7]==="published"?"pub":""}">${t(r[7])}</span></td>`;tb.appendChild(tr)})}
 document.querySelectorAll('#spectabs button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#spectabs button').forEach(x=>x.setAttribute('aria-selected',x===b));specs(b.dataset.tab)}));
 specs("all");
 
@@ -437,11 +506,11 @@ const PAPERS = [
   {k:"benchmark · in preparation",t:"PALETTE-BENCH-KO-VID: Korean prompt fidelity, in-video Hangul, ad briefs, Korean speech in generated video",d:"67 items, four tracks, with OCR and ASR instruments calibrated on known-good renders before any model was scored.",links:[["Numbers on this page","#benchmarks"]]},
   {k:"reports · in preparation",t:"Palette-K-Image and PALETTE-VOICE-KO",d:"Korean text rendering and editing inside images on an open base; Korean code-switched speech recognition and Korean TTS numerals. Comparators include closed APIs in the same tables.",links:[["Numbers on this page","#benchmarks"]]}
 ];
-const pp=$("#papers");PAPERS.forEach(x=>{const d=el("div","paper");d.innerHTML=`<div class="k">${x.k}</div><div class="t">${x.t}</div><div class="d">${x.d}</div><div class="links">${x.links.filter(l=>l[0]).map(l=>`<a href="${l[1]}">${l[0]} »</a>`).join("")}${x.k.includes('preparation')?'<span>Coming</span>':''}</div>`;pp.appendChild(d)});
+function renderPapers(){const pp=$("#papers");pp.innerHTML="";PAPERS.forEach(x=>{const d=el("div","paper");d.innerHTML=`<div class="k">${t(x.k)}</div><div class="t">${t(x.t)}</div><div class="d">${t(x.d)}</div><div class="links">${x.links.filter(l=>l[0]).map(l=>`<a href="${l[1]}">${t(l[0])} »</a>`).join("")}${x.k.includes("preparation")?`<span>${t("Coming")}</span>`:""}</div>`;pp.appendChild(d)})} renderPapers(); renderCards();
 
 const DETAIL = {
  "Songgot-X 0.8B":{base:"Qwen/Qwen3.5-0.8B (Apache 2.0), post-trained by Palette with the base's own chat template and tool-call format",
-  facts:[["Parameters","0.8B (24 layers: 18 Gated DeltaNet + 6 attention, 2 KV heads × 256)"],["Files","songgot-x-q4_k_m.gguf 505 MB · songgot-x-q8_0.gguf 774 MB · safetensors bf16"],["Context","262k positions; 12 KB of cache per token at fp16, 6.4 KB at q8_0"],["Licence","Apache 2.0, lineage on the card"],["Runs in","Songgot Pocket (browser, offline), Palette Desktop (llama-server), Chrome extension, llama.cpp, Ollama, LM Studio"],["Published","2026-09-16, weights of the evening soup"]],
+  facts:[["Parameters","0.8B (24 layers: 18 Gated DeltaNet + 6 attention, 2 KV heads × 256)"],["Files","songgot-x-q4_k_m.gguf 505 MB · songgot-x-q8_0.gguf 774 MB · safetensors bf16"],["Context","262k positions; 12 KB of cache per token at fp16, 6.4 KB at q8_0"],["Licence","Apache 2.0, lineage on the card"],["Runs in","Songgot Pocket (mobile offline LLM in the browser, Android and desktop), Palette Desktop, Chrome extension, llama.cpp, Ollama, LM Studio"],["Published","2026-09-16, weights of the evening soup"]],
   data:["175,000 rows sampled from Songgot v8 (palette-lab/songgot-tools-ko): Korean tool-calling pairs written by Palette-K-Midm from invented schemas, verified by a second pass; no closed model produced a label","31,307 targeted synthetic rows (weight 2) for copy fidelity, from/to roles, Korean number words, two-digit years","10,861 human Korean requests from Amazon MASSIVE 1.1 ko-KR train (CC BY 4.0), mapped to massive-agents functions; dev and test never used","KoSGD dialogue-state rows; v11–v13 targeted rounds (payload-only text, 19xx years, parameter-description following, verbatim time expressions, old/new roles, query-versus-create intent)"],
   why:"The highest Korean tool-call accuracy measured on any on-device model, in a file that loads in a browser tab. Reads the request the way a Korean user says it: verbatim times, Korean number words, sender and receiver roles, memo bodies and titles.",
   bench:[["FunctionChat SingleCall, call / name","82.2 / 96.4"],["exact / 4_random / 4_close / 8_random / 8_close","87 / 84 / 80 / 83 / 77"],["MASSIVE ko-KR held-out, 500 human requests, name","94.0 (Kanana-2 83.4)"],["As shipped, Q4_K_M with q8_0 cache","81.0 / 94.4"]],
@@ -496,11 +565,11 @@ const DETAIL = {
   links:[["MiniMax H3","https://huggingface.co/MiniMaxAI/MiniMax-H3"]]}
 };
 const dlg=$("#detail"); function openDetail(name){const d=DETAIL[name]; if(!d) return; $("#dname").textContent=name; $("#dbase").textContent=d.base;
-  const kv=d.facts.map(f=>`<dt>${f[0]}</dt><dd>${f[1]}</dd>`).join(""); const data=d.data.map(x=>`<li>${x}</li>`).join(""); const bench=d.bench.map(b=>`<tr><td>${b[0]}</td><td class="n">${b[1]}</td></tr>`).join("");
-  $("#dbody").innerHTML=`<div><h4>Facts</h4><dl class="kv">${kv}</dl></div><div><h4>Training data</h4><ul>${data}</ul></div><div class="full"><h4>What it does</h4><p>${d.why}</p></div><div class="full"><h4>Measured</h4><div class="tblwrap"><table><tbody>${bench}</tbody></table></div></div><div class="full dlinks">${d.links.map(l=>`<a class="btn ghost" href="${l[1]}"><span class="gl">»</span>${l[0]}</a>`).join("")}</div>`;
+  const kv=d.facts.map(f=>`<dt>${t(f[0])}</dt><dd>${f[1]}</dd>`).join(""); const data=d.data.map(x=>`<li>${x}</li>`).join(""); const bench=d.bench.map(b=>`<tr><td>${b[0]}</td><td class="n">${b[1]}</td></tr>`).join("");
+  $("#dbody").innerHTML=`<div><h4>${t("Facts")}</h4><dl class="kv">${kv}</dl></div><div><h4>${t("Training data")}</h4><ul>${data}</ul></div><div class="full"><h4>${t("What it does")}</h4><p>${t(d.why)}</p></div><div class="full"><h4>${t("Measured")}</h4><div class="tblwrap"><table><tbody>${bench}</tbody></table></div></div><div class="full dlinks">${d.links.map(l=>`<a class="btn ghost" href="${l[1]}"><span class="gl">»</span>${l[0]}</a>`).join("")}</div>`;
   dlg.showModal()}
-$("#dclose").addEventListener("click",()=>dlg.close()); dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
-document.querySelectorAll("#cards .card").forEach(a=>{a.addEventListener("click",e=>{const n=a.querySelector(".name").textContent; if(DETAIL[n]){e.preventDefault();openDetail(n)}})});
+$("#dclose").textContent=t("Close");$("#dclose").addEventListener("click",()=>dlg.close()); dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
+
 
 
 // motion: reveal-on-view like Edge0 (opacity + translate), bars wipe in, hero words stagger; a failsafe reveals everything after 2.5 s
@@ -514,7 +583,9 @@ document.querySelectorAll("#cards .card").forEach(a=>{a.addEventListener("click"
     an(".nav .cta",[{opacity:0,scale:.985,translate:"0 .5em"},{opacity:1,scale:1,translate:"0 0"}],200,700,GLASS);
     an(".hero h1",[{clipPath:"inset(100% 0 -14% 0)",translate:"0 .16em"},{clipPath:"inset(-18% 0 -14% 0)",translate:"0 0"}],380,980,EXPO);
     an(".hero .lede",[{opacity:0,translate:"0 .7em"},{opacity:1,translate:"0 0"}],770,560,SOFT);
-    an(".hero .btn",[{opacity:0,scale:.985,translate:"0 1.1em"},{opacity:1,scale:1,translate:"0 0"}],900,760,GLASS);
+    an(".hero .herobtns",[{opacity:0,scale:.985,translate:"0 1.1em"},{opacity:1,scale:1,translate:"0 0"}],900,760,GLASS);
+    an(".hero .proof",[{opacity:0,translate:"0 .6em"},{opacity:1,translate:"0 0"}],1100,600,SOFT);
+    an(".hero .heroart",[{opacity:0,scale:.97},{opacity:1,scale:1}],500,1200,GLASS);
     an(".scrollhint",[{opacity:0},{opacity:1}],1400,700,SOFT);
     Promise.all(running.map(a=>a.finished.catch(()=>{}))).then(()=>{d.classList.remove("pre");running.forEach(a=>a.cancel());running.length=0});
   }
@@ -526,6 +597,41 @@ document.querySelectorAll("#cards .card").forEach(a=>{a.addEventListener("click"
   setTimeout(()=>document.querySelectorAll(".rv:not(.in),.rrow:not(.in),.chart:not(.in)").forEach(t=>t.classList.add("in")),2500);
   // count-up on the big numbers
   document.querySelectorAll(".bigstat .n").forEach(n=>{const txt=n.firstChild.nodeValue.trim();const num=parseFloat(txt);if(isNaN(num))return;const dec=(txt.split(".")[1]||"").length;const t0=performance.now();const run=()=>{const k=Math.min(1,(performance.now()-t0)/1100);const e=1-Math.pow(1-k,3);n.firstChild.nodeValue=(num*e).toFixed(dec);if(k<1)requestAnimationFrame(run)};const o=new IntersectionObserver(es=>{if(es[0].isIntersecting){run();o.disconnect()}});o.observe(n)});
+})();
+
+
+// hero schematic: concentric Palette stack (device → edge → workstation → cloud) with flowing links, spinning tick rings and pulses
+(function(){const NS="http://www.w3.org/2000/svg";const svg=$("#schematic");if(!svg)return;svg.setAttribute("viewBox","0 -20 760 640");const el=(t,a,txt)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e};
+  const cx=380,cy=300;
+  [92,150,215,285].forEach((r,i)=>{el("circle",{cx,cy,r,class:"ring"+(i%2?" spin":" spin2")});el("circle",{cx,cy,r:r-3,class:"ring"})});
+  for(let a=0;a<360;a+=6){const rad=a*Math.PI/180,r1=285,r2=a%30?292:300;el("line",{x1:cx+Math.cos(rad)*r1,y1:cy+Math.sin(rad)*r1,x2:cx+Math.cos(rad)*r2,y2:cy+Math.sin(rad)*r2,class:"tick"})}
+  const layers=[["DEVICE","Songgot-X 0.8B · 505 MB · browser, phone, laptop",92],["EDGE","Palette Desktop · Chrome extension · Pocket",150],["WORKSTATION","Palette-K-Midm 11.5B · Palette-K-14B · STT 1.7B",215],["CLOUD","Palette-K-Doc 27B · K-Video API · K-Image 8B",285]];
+  layers.forEach(([k,v,r],i)=>{const y=cy-r+14;el("text",{x:cx,y:y-2,"text-anchor":"middle",class:"k"},k);el("text",{x:cx,y:y+12,"text-anchor":"middle"},v)});
+  // core
+  el("circle",{cx,cy,r:34,class:"node"});el("circle",{cx,cy,r:22,class:"node"});el("circle",{cx,cy,r:5,class:"core"});el("circle",{cx,cy,r:5,class:"pulse"});
+  el("text",{x:cx,y:cy+52,"text-anchor":"middle",class:"k"},"Palette core");el("text",{x:cx,y:cy+66,"text-anchor":"middle"},"Korean-first · open weights");
+  // satellite nodes with labels and flowing links to the core
+  const sats=[["FunctionChat","82.2 %",-215,-175,1],["PALETTE-BENCH-KO","0.866 · #1",-300,-30,1],["KDoc-OCRBench","84.2",-240,135,1],["HiKE speech","15.81 CER",-70,250,0],["Try-on print","0.283 CER",130,225,0],["Hangul in video","OCR-verified",290,110,0],["Korean images","5 / 6",300,-70,0],["Teacher","Palette-K-Midm",200,-215,1]];
+  sats.forEach(([n,v,dx,dy,hot])=>{const x=cx+dx,y=cy+dy;const mx=cx+dx*0.45,my=cy+dy*0.45-40;const d=`M${cx},${cy} Q${mx},${my} ${x},${y}`;el("path",{d,class:"ln"});el("path",{d,class:"flow"+(hot?"":" slow")});
+    el("rect",{x:x-6,y:y-6,width:12,height:12,class:"node"+(hot?"":" dim"),transform:`rotate(45 ${x} ${y})`});el("circle",{cx:x,cy:y,r:2,class:"core"});
+    const left=dx<0;el("text",{x:x+(left?-12:12),y:y-3,"text-anchor":left?"end":"start",class:"k"},n);el("text",{x:x+(left?-12:12),y:y+11,"text-anchor":left?"end":"start"},v)});
+  // orbit dots
+  for(let i=0;i<6;i++){const g=el("g",{});const r=[92,150,215,285][i%4];const c=document.createElementNS(NS,"circle");c.setAttribute("r","2.2");c.setAttribute("class","core");c.setAttribute("cx",cx+r);c.setAttribute("cy",cy);g.appendChild(c);g.style.transformOrigin=`${cx}px ${cy}px`;g.style.animation=`spin ${18+i*7}s linear infinite${i%2?" reverse":""}`}
+})();
+// stack diagram: five lanes, links drawn as cubic curves, hot links animate
+(function(){const NS="http://www.w3.org/2000/svg";const svg=$("#stackdiag");if(!svg)return;const el=(t,a,txt)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e};
+  const lanes=[["Korean data",60],["Palette teacher",340],["Models",620],["Benchmarks",900],["Products",1180]];
+  lanes.forEach(([n,x])=>{el("line",{x1:x+95,y1:22,x2:x+95,y2:600,class:"lane"});el("text",{x:x+95,y:14,"text-anchor":"middle",class:"lane"},n)});
+  const nodes={
+    d1:["Licence-clean Korean text","Wikipedia, public data, own documents",60,60],d2:["Invented tool schemas","395k tools, 200k+ calls",60,150],d3:["Human voice requests","MASSIVE ko-KR, KoSGD",60,240],d4:["Synthetic Hangul renders","OFL fonts, 11,172 syllables",60,330],d5:["Korean speech","code-switched, read, wild",60,420],d6:["Government PDFs","tables, headers, footers",60,510],
+    t1:["Palette-K-Midm 11.5B","writes and verifies every label",340,200,"ours"],t2:["Deterministic gates","rules + second-pass verifier",340,330],
+    m1:["Songgot-X 0.8B","tool calling · #1 Korean on-device",620,60,"ours"],m2:["Songgot 50M–303M","from scratch",620,140,"ours"],m3:["Palette-K-Midm · K-14B","enterprise documents",620,220,"ours"],m4:["Palette-K-Doc","OCR pipeline + 8B adapter",620,300,"ours"],m5:["Palette-K-Image · VTON","Korean text in pixels",620,380,"ours"],m6:["Palette-K-Video","verified-text API",620,460,"ours"],m7:["Palette STT","code-switch speech",620,540,"ours"],
+    b1:["FunctionChat SingleCall","82.2 / 96.4",900,60,"bench"],b2:["PALETTE-BENCH-KO","0.866 · #1 of 7",900,150,"bench"],b3:["KDoc-OCRBench-V2","84.2",900,240,"bench"],b4:["Edit + VTON hidden sets","5/6 · CER 0.283",900,330,"bench"],b5:["PALETTE-BENCH-KO-VID","67 items",900,420,"bench"],b6:["HiKE · FLEURS · Zeroth","15.81 CER",900,510,"bench"],
+    p1:["Songgot Pocket","mobile offline LLM, browser",1180,60,"ours"],p2:["Palette Desktop","Mac app, three engines",1180,150,"ours"],p3:["Chrome extension","side panel",1180,240,"ours"],p4:["Palette OS","agents, documents, video",1180,330,"ours"],p5:["Hosted API","Korea and Singapore",1180,420,"ours"],p6:["On-prem","banks, SECURE",1180,510,"ours"]};
+  const W=190,H=54; const c=(k)=>{const n=nodes[k];return [n[2]+W,n[3]+H/2,n[2],n[3]+H/2]};
+  const link=(a,b,hot)=>{const [ax,ay]=c(a),[,,bx,by]=c(b);const d=`M${ax},${ay} C${ax+70},${ay} ${bx-70},${by} ${bx},${by}`;el("path",{d,class:"link"});if(hot)el("path",{d,class:"link hot"})};
+  [["d1","t1",1],["d2","t1",1],["d3","t1",0],["d4","m5",0],["d5","m7",0],["d6","m4",0],["t1","t2",1],["t2","m1",1],["t2","m2",0],["t1","m3",1],["m1","b1",1],["m2","b1",0],["m3","b2",1],["m4","b3",1],["m5","b4",0],["m6","b5",0],["m7","b6",0],["b1","p1",1],["b1","p2",1],["b1","p3",0],["b2","p4",1],["b3","p4",0],["b5","p5",0],["b2","p6",0],["m6","p5",0]].forEach(([a,b,h])=>link(a,b,h));
+  for(const k in nodes){const [t,sub,x,y,cls]=nodes[k];el("rect",{x,y,width:W,height:H,class:"box "+(cls||"")});el("text",{x:x+12,y:y+22},t);el("text",{x:x+12,y:y+40,class:"sub"},sub);if(cls==="ours")el("circle",{cx:x+W-12,cy:y+12,r:2.5,class:"dot"})}
 })();
 
 // hero: 3D obsidian facet field (Three.js). Flat-shaded triangulated plane displaced by layered value noise, a slow light sweep so facets catch highlights,
@@ -552,6 +658,7 @@ document.querySelectorAll("#cards .card").forEach(a=>{a.addEventListener("click"
   const key=new THREE.DirectionalLight(0xffffff,0.85); key.position.set(-7,6,7); scene.add(key);
   const sweep=new THREE.PointLight(0xffffff,0.9,20,2); sweep.position.set(-8,3.5,5); scene.add(sweep);
   const rim=new THREE.DirectionalLight(0xb9c6ff,0.35); rim.position.set(8,-2,4); scene.add(rim);
+  let sweepBase=0.8; cv._theme=(light)=>{const g=light?0xf4f4f2:0x050505;renderer.setClearColor(g,1);scene.fog.color.set(g);mat.color.set(light?0xd6d6d2:0x262626);mat.roughness=light?0.7:0.58;key.intensity=light?1.0:0.85;sweepBase=light?0.35:0.8;rim.intensity=light?0.15:0.35;cv._render&&cv._render()};
   let mx=0,my=0,tx=0,ty=0; addEventListener("pointermove",e=>{tx=(e.clientX/innerWidth-.5);ty=(e.clientY/innerHeight-.5)},{passive:true});
   function resize(){const w=cv.clientWidth,h=cv.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()} resize(); addEventListener("resize",resize);
   let visible=true; new IntersectionObserver(es=>{visible=es[0].isIntersecting}).observe(cv);
@@ -560,14 +667,14 @@ document.querySelectorAll("#cards .card").forEach(a=>{a.addEventListener("click"
     const t=(now-t0)/1000;
     for(let i=0,n=pos.count;i<n;i++){const x=base[i*3],y=base[i*3+1];const d=noise(x*0.22+t*0.05,y*0.22-t*0.04)*1.5+noise(x*0.7-t*0.03,y*0.7+t*0.06)*0.45+noise(x*2.1,y*2.1+t*0.1)*0.1;pos.array[i*3+2]=base[i*3+2]+d}
     pos.needsUpdate=true; geo.computeVertexNormals();
-    sweep.position.x=Math.sin(t*0.19)*11; sweep.position.y=Math.cos(t*0.13)*4; sweep.intensity=0.8+Math.sin(t*0.5)*0.3;
+    sweep.position.x=Math.sin(t*0.19)*11; sweep.position.y=Math.cos(t*0.13)*4; sweep.intensity=sweepBase+Math.sin(t*0.5)*0.3;
     key.position.x=-6+Math.sin(t*0.09)*3;
     mx+=(tx-mx)*0.04; my+=(ty-my)*0.04; const sc=Math.min(1,scrollY/Math.max(1,innerHeight));
     cam.position.x=mx*1.2; cam.position.y=-my*0.8-sc*1.6; cam.position.z=8.5+sc*2; cam.lookAt(mx*0.5,-my*0.3-sc*0.8,0);
     renderer.render(scene,cam);
   }
   if(reduced){frame(t0+2000);return}
-  frame(t0); function loop(now){if(visible&&!document.hidden)frame(now);requestAnimationFrame(loop)} requestAnimationFrame(loop);
+  cv._render=()=>frame(performance.now()); if(document.documentElement.dataset.theme==='light')cv._theme(true); frame(t0); function loop(now){if(visible&&!document.hidden)frame(now);requestAnimationFrame(loop)} requestAnimationFrame(loop);
 })();
 // closing section: slow white wireframe knot with an inner icosahedron, the line-art of the cards in three dimensions
 (function(){
@@ -577,11 +684,180 @@ document.querySelectorAll("#cards .card").forEach(a=>{a.addEventListener("click"
   const sc=new THREE.Scene(); const cam=new THREE.PerspectiveCamera(38,1,0.1,50); cam.position.set(0,0,7.5);
   const knot=new THREE.LineSegments(new THREE.WireframeGeometry(new THREE.TorusKnotGeometry(1.9,0.58,180,20,2,3)),new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:0.26}));
   const ico=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(1.05,1)),new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:0.6}));
-  sc.add(knot); sc.add(ico);
+  sc.add(knot); sc.add(ico); cv._theme=(light)=>{knot.material.color.set(light?0x0a0a0a:0xffffff);ico.material.color.set(light?0x0a0a0a:0xffffff);cv._render&&cv._render()};
   function resize(){const w=cv.clientWidth,h=cv.clientHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()} resize(); addEventListener("resize",resize);
   let visible=false; new IntersectionObserver(es=>{visible=es[0].isIntersecting}).observe(cv);
   function frame(t){knot.rotation.y=t*0.00012;knot.rotation.x=Math.sin(t*0.00009)*0.35;ico.rotation.y=-t*0.0003;ico.rotation.z=t*0.00011;r.render(sc,cam)}
-  cv._render=()=>frame(4000); frame(4000); if(reduced)return;
+  cv._render=()=>frame(4000); if(document.documentElement.dataset.theme==='light')cv._theme(true); frame(4000); if(reduced)return;
   (function loop(t){if(visible&&!document.hidden)frame(t);requestAnimationFrame(loop)})(0);
+})();
+</script>
+
+<script>
+// ---------- dictionaries: Korean first, then Japanese; English strings are the keys ----------
+window.T={ko:{
+"Models":"모델","Benchmarks":"벤치마크","Footprint":"메모리","Research":"연구","Stack":"스택","Why Palette":"왜 Palette인가","Connect":"문의하기","Close":"닫기","Scroll":"스크롤",
+"Palette · Seoul and Bengaluru · 2026":"Palette · 서울 · 벵갈루루 · 2026",
+"Korea's #1 on-device AI. Built by Palette.":"한국 1위 온디바이스 AI. Palette가 만듭니다.",
+"lede":"<b>4주 만에 한국어 우선 모델 16종.</b> 그중 최고 모델은 카카오 자체 벤치마크에서 카카오·LG 모델을 앞서고, 브라우저 탭 안에서 돌아가며, 토큰당 비용은 0원입니다.",
+"Explore the models":"모델 보기","Measured against":"비교 측정 대상",
+"82.2 % call accuracy":"호출 정확도 82.2 %","505 MB on a phone":"휴대폰에서 505 MB","#1 of 7 on enterprise documents":"기업 문서 벤치마크 7개 모델 중 1위","84.2 on Korean document OCR":"한국어 문서 OCR 84.2","0 won per token":"토큰당 0원",
+"stat1":"Songgot-X 0.8B, FunctionChat-Bench SingleCall 한국어 툴 호출 정확도. 카카오 Kanana-2(73.2)를 포함해 측정한 모든 모델 중 최고.",
+"stat2":"양자화된 모델 전체가 브라우저 탭이나 휴대폰 안에서 실행됩니다. 토큰당 컨텍스트 메모리 12 KB.",
+"stat3":"2026년 8월부터 구축한 모델 라인: 언어, 문서, 이미지, 영상, 가상 피팅, 음성. 9종 공개, 7종 측정 완료·공개 예정.",
+"Open weights, Apache 2.0":"오픈 웨이트, Apache 2.0","ben1":"내려받아 오프라인으로 실행하고 제품 안에 넣으세요. 토큰 과금 없음, 기기 밖으로 나가는 데이터 없음.",
+"Korean enterprise work, not trivia":"퀴즈가 아니라 한국 기업 실무","ben2":"한국어 툴 호출, 공문서·품의서 작성, 회의록에서 결정 사항 추출, KDoc 표, 생성 이미지·영상 속 한글.",
+"Measured in public":"공개 측정","ben3":"정확 일치, 문자 오류율, 필드-F1: 직접 돌려볼 수 있는 채점기로, 가장 강한 한국어·프런티어 모델과 같은 표에서 비교합니다.",
+"Device ladder":"디바이스 사다리","How far down the device ladder do Palette models reach?":"Palette 모델은 디바이스 사다리의 어디까지 내려갈까요?",
+"From a browser tab to a server rack: which Palette model runs at each tier today, with the file you actually download.":"브라우저 탭에서 서버 랙까지: 지금 각 단계에서 실행되는 Palette 모델과 실제로 내려받는 파일.",
+"Phone, offline":"휴대폰, 오프라인","50–800 MB · no server, no signal needed · Android and desktop browsers":"50–800 MB · 서버도 신호도 필요 없음 · Android 및 데스크톱 브라우저","Songgot Pocket: mobile offline LLM":"Songgot Pocket: 모바일 오프라인 LLM",
+"Laptop":"노트북","8–64 GB · Apple silicon, one GPU":"8–64 GB · Apple 실리콘, GPU 1장","Palette Desktop":"Palette Desktop","Workstation":"워크스테이션","24–80 GB · one H100 class card":"24–80 GB · H100급 카드 1장","Server":"서버","80 GB+ · multi-GPU, hosted API":"80 GB 이상 · 멀티 GPU, 호스팅 API","Modal, KR/SG regions":"Modal, 한국/싱가포르 리전",
+"Parameter count is not the same thing as RAM.":"파라미터 수와 RAM은 다른 이야기입니다.","See the models":"모델 보기","Language, on device":"언어, 온디바이스","Language, workstation":"언어, 워크스테이션","Vision, speech, image":"비전·음성·이미지",
+"ramnote":"막대는 공개된 그대로 불러오는 파일 크기입니다: 온디바이스 행은 양자화 GGUF, 나머지는 bf16 safetensors(파라미터당 2바이트). 컨텍스트 메모리는 별도로 토큰마다 늘어나며, Songgot-X는 24개 층 중 6개만 캐시가 커지므로 fp16에서 토큰당 12 KB, q8_0에서 6.4 KB입니다.",
+"Every model, the number it was measured to, next to what it was measured against.":"모든 모델, 측정된 숫자, 그리고 비교 대상을 한 표에.",
+"Hover a bar for the exact figure. White bars are Palette models. Each chart names its benchmark, scorer, item count and date.":"막대에 마우스를 올리면 정확한 값이 보입니다. 밝은 막대가 Palette 모델입니다. 각 차트에 벤치마크, 채점기, 문항 수, 날짜를 적었습니다.",
+"comparators":"비교 모델","lower is better":"낮을수록 좋음",
+"The family":"모델 패밀리","A family of models. One engineering discipline.":"하나의 모델 패밀리. 하나의 엔지니어링 원칙.","All models and specs":"전체 모델과 사양","Specs":"사양","All":"전체","Language":"언어","Documents & vision":"문서·비전","Image, video, try-on":"이미지·영상·가상 피팅","Speech":"음성",
+"Model":"모델","Base":"베이스","Params":"파라미터","File":"파일","Benchmark":"벤치마크","Score":"점수","Licence":"라이선스","Status":"상태",
+"published":"공개","measured":"측정 완료","api":"API","system":"시스템",
+"statusnote":"상태: <b>공개</b> = 지금 Hugging Face에 가중치 공개; <b>측정 완료</b> = 채점 완료, 공개 예정; <b>API</b> = 호스팅 API로 제공; <b>시스템</b> = 오픈 베이스 위의 Palette 파이프라인.",
+"Papers, benchmarks and the sweeps behind every claim.":"모든 주장 뒤에 있는 논문, 벤치마크, 선행 조사.","Published work links out. Reports in preparation already have their numbers on this page.":"공개된 자료는 링크로 이어집니다. 준비 중인 보고서의 숫자는 이미 이 페이지에 있습니다.",
+"paper · published":"논문 · 공개","study · published":"연구 노트 · 공개","benchmark · published":"벤치마크 · 공개","prior art · published":"선행 조사 · 공개","report · in preparation":"보고서 · 준비 중","benchmark · in preparation":"벤치마크 · 준비 중","reports · in preparation":"보고서 · 준비 중","Coming":"준비 중","Read":"읽기","Code, data, scorer":"코드·데이터·채점기","Dataset":"데이터셋","Results on the model card":"모델 카드의 결과","Prior-art log":"선행 조사 기록","Naver sweep":"네이버 조사","Numbers on this page":"이 페이지의 숫자",
+"The stack":"스택","One pipeline from Korean data to the device in your pocket.":"한국어 데이터에서 주머니 속 기기까지, 하나의 파이프라인.",
+"Palette's own teacher writes the training data, every model is scored on public benchmarks before it ships, and the same weights run in the browser, on the laptop and in the rack.":"Palette 자체 교사 모델이 학습 데이터를 쓰고, 모든 모델은 출시 전에 공개 벤치마크로 채점되며, 같은 가중치가 브라우저·노트북·서버 랙에서 실행됩니다.",
+"AI that Korean work can actually run on.":"한국의 일이 실제로 돌릴 수 있는 AI.","Tool calls on a phone, documents on a workstation, video in the cloud. One family, Korean-first, open where it can be, measured everywhere.":"휴대폰에서 툴 호출, 워크스테이션에서 문서, 클라우드에서 영상. 하나의 패밀리, 한국어 우선, 가능한 곳은 모두 오픈, 모든 곳에서 측정.",
+"rule1":"<b>한국어 온디바이스 툴 호출 1위.</b> Songgot-X는 한국 최대 AI 연구소 두 곳의 모델을 포함해 측정된 모든 모델을 앞서며, 브라우저 탭 안에 들어갑니다.",
+"rule2":"<b>32B를 이기는 14B.</b> Palette-K-14B와 Palette-K-Midm이 한국 기업 문서 벤치마크 PALETTE-BENCH-KO에서 두 배 크기의 Qwen·카카오·네이버 모델을 앞섭니다.",
+"rule3":"<b>혼용 음성에서 최고의 오픈 한국어 STT.</b> Palette STT가 HiKE 코드 스위칭 벤치마크에서 오픈 시스템 중 1위입니다.",
+"rule4":"<b>생성 과정을 견디는 한글.</b> 이미지·영상·가상 피팅 사진 속 한글을 출시 전에 OCR로 검증합니다.",
+"rule5":"<b>데이터가 있는 곳에서 실행.</b> 기기에서 오프라인, 사내 랙에서 온프레미스, 또는 한국·싱가포르 호스팅. 공개된 모든 가중치는 Apache 2.0.",
+"Run it":"실행하기","Songgot Pocket (browser)":"Songgot Pocket (브라우저)","All on Hugging Face":"Hugging Face 전체 보기","FunctionChat exact-match scorer":"FunctionChat 정확 일치 채점기","Songgot paper":"Songgot 논문","songgot-tools-ko data":"songgot-tools-ko 데이터",
+"footer1":"기기와 서버 랙을 위한 한국어 우선 모델. 모두 출시 전에 공개 채점을 거칩니다.","footer2":"© 2026 Palette. 공개된 모든 가중치는 Apache 2.0. 답변은 AI 모델이 생성합니다(AI 기본법 표시).","footer3":"숫자 기준일 2026-09-17.",
+"Facts":"기본 정보","Training data":"학습 데이터","What it does":"무엇을 하는가","Measured":"측정 결과","Parameters":"파라미터","Files":"파일","Context":"컨텍스트","Runs in":"실행 환경","Published":"공개일","Pretraining":"사전학습","Serve":"서빙","Adapter":"어댑터","Stage":"단계","Fonts":"폰트","Data":"데이터","Corpus":"코퍼스","Training":"학습","API":"API","Pipeline":"파이프라인","LoRA":"LoRA",
+"call accuracy":"호출 정확도","call accuracy, 54 MB":"호출 정확도, 54 MB","PALETTE-BENCH-KO, #1 of 7":"PALETTE-BENCH-KO, 7개 중 1위","beats untuned 32B":"미튜닝 32B를 앞섬","KDoc-OCRBench-V2":"KDoc-OCRBench-V2","HiKE CER, best open":"HiKE CER, 오픈 1위","Korean text edits":"한글 텍스트 편집","print CER (base 0.570)":"프린트 CER (베이스 0.570)","Hangul CER (base 0.127)":"한글 CER (베이스 0.127)",
+"Qwen3.5-0.8B · post-trained by Palette":"Qwen3.5-0.8B · Palette 사후학습","50M · trained from scratch · 6B tokens":"50M · 처음부터 학습 · 6B 토큰","KT Mi:dm-2.0 11.5B · LoRA r=8":"KT Mi:dm-2.0 11.5B · LoRA r=8","Qwen2.5-14B · QLoRA":"Qwen2.5-14B · QLoRA","Qwen3.8-27B pipeline + Qwen3-VL-8B LoRA":"Qwen3.8-27B 파이프라인 + Qwen3-VL-8B LoRA","Qwen3-ASR-1.7B · frozen tower":"Qwen3-ASR-1.7B · 오디오 타워 고정","SenseNova-U1.5 8B-MoT · stage A":"SenseNova-U1.5 8B-MoT · A단계","fashn-vton-1.5 · fine-tuned":"fashn-vton-1.5 · 파인튜닝","MiniMax H3 · LoRA + verified-text API":"MiniMax H3 · LoRA + 텍스트 검증 API",
+"Korean tool calling, call accuracy":"한국어 툴 호출, 호출 정확도","Korean tool calling, name-only accuracy":"한국어 툴 호출, 함수명 정확도","Songgot-X as shipped: quantized weights and cache":"출시 형태의 Songgot-X: 양자화 가중치와 캐시","Korean enterprise documents, overall":"한국 기업 문서, 종합","Korean document OCR, KDoc-OCRBench-V2":"한국어 문서 OCR, KDoc-OCRBench-V2","Korean code-switched speech, character error rate":"한·영 혼용 음성, 문자 오류율","Korean text editing inside images":"이미지 속 한글 편집","Virtual try-on, printed text fidelity":"가상 피팅, 프린트 텍스트 보존","Hangul inside generated video":"생성 영상 속 한글",
+"Highest call accuracy of every model measured, 9 points above Kakao's Kanana-2 on Kakao's own benchmark. Songgot-X is also the only model in the top three you can ship inside a product: Kanana's licence forbids on-device redistribution and EXAONE is research-only.":"측정한 모든 모델 중 최고 호출 정확도. 카카오 자체 벤치마크에서 카카오 Kanana-2보다 9점 높습니다. 상위 3개 중 제품에 넣어 배포할 수 있는 모델은 Songgot-X뿐입니다: Kanana 라이선스는 온디바이스 재배포를 금지하고 EXAONE은 연구 전용입니다.",
+"Songgot-X picks the right function 96.4 percent of the time, level with Kanana-2 within one standard error, at 60 percent of its size.":"Songgot-X는 96.4%의 확률로 올바른 함수를 고릅니다. 크기가 60%에 불과하면서 Kanana-2와 표준오차 안에서 동률입니다.",
+"The 505 MB build keeps 81 percent call accuracy, and a q8_0 cache halves context memory with no measurable cost. This is the file Pocket, Palette Desktop and the Chrome extension run.":"505 MB 빌드도 호출 정확도 81%를 유지하며, q8_0 캐시는 측정 가능한 손실 없이 컨텍스트 메모리를 절반으로 줄입니다. Pocket, Palette Desktop, Chrome 확장이 실행하는 바로 그 파일입니다.",
+"Palette-K-Midm leads the Korean base it adapts and every open comparator on the benchmark, including Kakao's and Naver's models; Palette-K-14B beats the untuned 32B.":"Palette-K-Midm은 베이스인 한국어 모델과 카카오·네이버 모델을 포함한 모든 오픈 비교 모델을 앞섭니다. Palette-K-14B는 미튜닝 32B를 이깁니다.",
+"84.2 ± 0.4, above the public leaderboard top, from the Palette document pipeline over an open base. The 8B adapter adds +35 points on header and footer handling.":"84.2 ± 0.4, 공개 리더보드 1위보다 높은 점수를 오픈 베이스 위의 Palette 문서 파이프라인이 냈습니다. 8B 어댑터는 머리글·바닥글 처리에서 +35점을 더합니다.",
+"Lower is better. Best open system on Korean-English code-switched speech, ahead of Cohere's transcription model, while keeping read-speech accuracy (FLEURS 2.9, Zeroth 3.1).":"낮을수록 좋음. 한·영 혼용 음성에서 Cohere 전사 모델을 앞서는 최고의 오픈 시스템이며, 낭독 음성 정확도(FLEURS 2.9, Zeroth 3.1)도 유지합니다.",
+"The only open-weight model in the table, ahead of every closed editor on Korean text edits, with background preservation (SSIM 0.989) level with the best of them. Pilot set of six; the full benchmark follows.":"표에서 유일한 오픈 웨이트 모델로, 한글 텍스트 편집에서 모든 클로즈드 편집기를 앞서고 배경 보존(SSIM 0.989)은 최고 수준과 동률입니다. 6문항 파일럿이며 전체 벤치마크가 뒤따릅니다.",
+"Lower is better. Printed text on garments survives the try-on twice as well as the open base or the top commercial API, with face identity 0.871 and background SSIM 0.990 kept.":"낮을수록 좋음. 옷의 프린트 문구가 오픈 베이스나 최상위 상용 API보다 두 배 잘 살아남으며, 얼굴 동일성 0.871과 배경 SSIM 0.990을 유지합니다.",
+"Lower is better, 4-item test. The Palette video API goes further: declared Korean strings are verified by OCR on every clip before delivery, CER 0.000 on the declared text.":"낮을수록 좋음, 4문항 테스트. Palette 영상 API는 한 걸음 더 나가 모든 클립의 지정 한글 문구를 배송 전에 OCR로 검증합니다. 지정 문구 CER 0.000.",
+"FunctionChat-Bench SingleCall (Kakao) · 500 items · exact match on name and arguments · our public scorer · 2026-09-16":"FunctionChat-Bench SingleCall (카카오) · 500문항 · 함수명·인자 정확 일치 · Palette 공개 채점기 · 2026-09-16",
+"same 500 items · right function chosen · 2026-09-16":"같은 500문항 · 올바른 함수 선택 · 2026-09-16","same benchmark · Q4_K_M GGUF through llama.cpp · 2026-09-16":"같은 벤치마크 · llama.cpp의 Q4_K_M GGUF · 2026-09-16",
+"PALETTE-BENCH-KO v0.2 · 32 items, 6 families · field-F1, key facts, gpt-4o rubric for 4 families · 2026-08-22":"PALETTE-BENCH-KO v0.2 · 32문항, 6개 패밀리 · 필드-F1, 핵심 사실, 4개 패밀리는 gpt-4o 루브릭 · 2026-08-22",
+"849 public-sector PDFs · leaderboard scorer, mean of 4 categories · 2026-09-03/06":"공공기관 PDF 849건 · 리더보드 채점기, 4개 범주 평균 · 2026-09-03/06","HiKE benchmark · corrected CER, lower is better · 2026-09-07":"HiKE 벤치마크 · 보정 CER, 낮을수록 좋음 · 2026-09-07",
+"edit track · 6 items · success = target text read back by OCR · closed models via API · 2026-09-02":"편집 트랙 · 6문항 · 성공 = OCR로 목표 문구 판독 · 클로즈드 모델은 API · 2026-09-02","PALETTE-BENCH-VTON hidden set · 28 items, 16 with print · CER, lower is better · two-run reproduced · 2026-09-01":"PALETTE-BENCH-VTON 비공개 세트 · 28문항, 프린트 16건 · CER, 낮을수록 좋음 · 2회 재현 · 2026-09-01",
+"PALETTE-BENCH-KO-VID track B · target-string CER, lower is better · 4-item LoRA test at scale 0.4 · 2026-09-06":"PALETTE-BENCH-KO-VID 트랙 B · 목표 문구 CER, 낮을수록 좋음 · 스케일 0.4 LoRA 4문항 테스트 · 2026-09-06",
+"The highest Korean tool-call accuracy measured on any on-device model, in a file that loads in a browser tab. Reads the request the way a Korean user says it: verbatim times, Korean number words, sender and receiver roles, memo bodies and titles.":"온디바이스 모델 중 측정된 최고의 한국어 툴 호출 정확도를 브라우저 탭에서 열리는 파일 하나로. 한국어 사용자가 말하는 그대로 이해합니다: 시간 표현 그대로, 한국어 숫자, 발신·수신 역할, 메모 본문과 제목.",
+"A complete Korean tool-calling model in 54 MB, trained from scratch on licence-clean text with a Korean-first tokenizer. Smallest openly licensed Korean model with a published tool-calling number; runs on a phone from a web page.":"54 MB 안의 완전한 한국어 툴 호출 모델. 라이선스가 깨끗한 텍스트와 한국어 우선 토크나이저로 처음부터 학습했습니다. 툴 호출 점수를 공개한 가장 작은 오픈 라이선스 한국어 모델로, 웹 페이지에서 휴대폰으로 실행됩니다.",
+"Top of PALETTE-BENCH-KO across seven Korean and open models, on the document work Korean companies actually do: 공문서, 품의서, meeting minutes, disclosures, policy.":"한국 기업이 실제로 하는 문서 업무(공문서, 품의서, 회의록, 공시, 정책)에서 한국어·오픈 모델 7종 중 PALETTE-BENCH-KO 1위.",
+"A 14B that outscores the untuned 32B on every family. Fits one 80 GB card, serves on vLLM, Apache 2.0.":"모든 패밀리에서 미튜닝 32B를 앞서는 14B. 80 GB 카드 한 장에 들어가고 vLLM으로 서빙, Apache 2.0.",
+"State of the art on the public Korean document benchmark: 84.2 against a leaderboard top of 82.3. Government PDFs, tables, running heads and footers, at 2,200-pixel fidelity.":"공개 한국어 문서 벤치마크 최고 성능: 리더보드 1위 82.3 대비 84.2. 정부 PDF, 표, 머리글·바닥글을 2,200픽셀 해상도로.",
+"Korean speech as it is actually spoken in offices, with English terms mixed in. Best open result on the HiKE code-switch benchmark, ahead of Cohere, without giving up read-speech accuracy.":"영어 용어가 섞인, 사무실에서 실제로 쓰는 한국어 음성. HiKE 코드 스위칭 벤치마크에서 Cohere를 앞서는 최고의 오픈 결과, 낭독 음성 정확도도 그대로.",
+"Korean text you can read inside generated and edited images: named fonts, dense text, layout boxes, 4K small type. Open weights, so it runs on-prem where brand assets stay private.":"생성·편집 이미지 안에서 읽을 수 있는 한글: 지정 폰트, 빽빽한 텍스트, 레이아웃 박스, 4K 작은 글자. 오픈 웨이트라 브랜드 자산이 머무는 온프레미스에서 실행됩니다.",
+"Try-on that keeps the print on the shirt, the face of the person and the background of the photo. Half the print error of the top commercial API, with the same person in the frame.":"셔츠의 프린트, 사람의 얼굴, 사진의 배경을 지키는 가상 피팅. 최상위 상용 API의 절반 수준 프린트 오류, 같은 사람이 그대로.",
+"Korean signboards, menus, subtitles and labels that read correctly in generated video, verified by OCR on every clip before it is delivered. Served as an API with native Korean speech, 5 to 15 seconds, 768p.":"생성 영상 속 간판·메뉴·자막·라벨의 한글이 제대로 읽히도록 모든 클립을 배송 전 OCR로 검증. 한국어 음성이 포함된 API, 5~15초, 768p."
+},
+ja:{
+"Models":"モデル","Benchmarks":"ベンチマーク","Footprint":"メモリ","Research":"研究","Stack":"スタック","Why Palette":"なぜPalette","Connect":"お問い合わせ","Close":"閉じる","Scroll":"スクロール",
+"Palette · Seoul and Bengaluru · 2026":"Palette · ソウル · ベンガルール · 2026",
+"Korea's #1 on-device AI. Built by Palette.":"韓国No.1のオンデバイスAI。Paletteが作る。",
+"lede":"<b>4週間で韓国語ファーストのモデルを16本。</b> 最良のモデルはKakao自身のベンチマークでKakao・LGのモデルを上回り、ブラウザのタブ内で動き、トークン単価はゼロ。",
+"Explore the models":"モデルを見る","Measured against":"比較対象",
+"82.2 % call accuracy":"呼び出し精度 82.2 %","505 MB on a phone":"スマホで505 MB","#1 of 7 on enterprise documents":"企業文書ベンチで7モデル中1位","84.2 on Korean document OCR":"韓国語文書OCR 84.2","0 won per token":"トークン単価0ウォン",
+"stat1":"Songgot-X 0.8B、FunctionChat-Bench SingleCallの韓国語ツール呼び出し精度。KakaoのKanana-2（73.2）を含む全測定モデル中で最高。",
+"stat2":"量子化したモデル全体がブラウザのタブやスマホの中で動作。トークンあたりのコンテキストメモリは12 KB。",
+"stat3":"2026年8月から構築したモデルライン：言語、文書、画像、動画、試着、音声。9本公開、7本は測定済みで公開予定。",
+"Open weights, Apache 2.0":"オープンウェイト、Apache 2.0","ben1":"ダウンロードしてオフラインで実行し、製品に組み込めます。トークン課金なし、端末外に出るデータなし。",
+"Korean enterprise work, not trivia":"クイズではなく韓国企業の実務","ben2":"韓国語ツール呼び出し、公文書・稟議書の作成、議事録から決定事項の抽出、KDocの表、生成画像・動画内のハングル。",
+"Measured in public":"公開の場で測定","ben3":"完全一致、文字誤り率、フィールドF1：自分で実行できる採点器で、最強の韓国語・フロンティアモデルと同じ表で比較。",
+"Device ladder":"デバイスの階段","How far down the device ladder do Palette models reach?":"Paletteのモデルはデバイスの階段をどこまで降りられるか？",
+"From a browser tab to a server rack: which Palette model runs at each tier today, with the file you actually download.":"ブラウザのタブからサーバーラックまで：各層で今日動くPaletteモデルと、実際にダウンロードするファイル。",
+"Phone, offline":"スマホ、オフライン","50–800 MB · no server, no signal needed · Android and desktop browsers":"50–800 MB · サーバーも電波も不要 · Androidとデスクトップのブラウザ","Songgot Pocket: mobile offline LLM":"Songgot Pocket：モバイル・オフラインLLM",
+"Laptop":"ノートPC","8–64 GB · Apple silicon, one GPU":"8–64 GB · Appleシリコン、GPU 1枚","Palette Desktop":"Palette Desktop","Workstation":"ワークステーション","24–80 GB · one H100 class card":"24–80 GB · H100級カード1枚","Server":"サーバー","80 GB+ · multi-GPU, hosted API":"80 GB以上 · マルチGPU、ホスト型API","Modal, KR/SG regions":"Modal、韓国/シンガポールリージョン",
+"Parameter count is not the same thing as RAM.":"パラメータ数とRAMは別物です。","See the models":"モデルを見る","Language, on device":"言語、オンデバイス","Language, workstation":"言語、ワークステーション","Vision, speech, image":"ビジョン・音声・画像",
+"ramnote":"バーは公開されたまま読み込むファイルのサイズです：オンデバイス行は量子化GGUF、その他はbf16 safetensors（パラメータあたり2バイト）。コンテキストメモリは別途トークンごとに増え、Songgot-Xは24層中6層だけキャッシュが増えるため、fp16でトークンあたり12 KB、q8_0で6.4 KBです。",
+"Every model, the number it was measured to, next to what it was measured against.":"すべてのモデル、測定された数値、そして比較対象を同じ表に。",
+"Hover a bar for the exact figure. White bars are Palette models. Each chart names its benchmark, scorer, item count and date.":"バーにカーソルを合わせると正確な値が見えます。明るいバーがPaletteのモデルです。各チャートにベンチマーク、採点器、設問数、日付を記載。",
+"comparators":"比較モデル","lower is better":"低いほど良い",
+"The family":"モデルファミリー","A family of models. One engineering discipline.":"ひとつのモデルファミリー。ひとつのエンジニアリング規律。","All models and specs":"全モデルと仕様","Specs":"仕様","All":"すべて","Language":"言語","Documents & vision":"文書・ビジョン","Image, video, try-on":"画像・動画・試着","Speech":"音声",
+"Model":"モデル","Base":"ベース","Params":"パラメータ","File":"ファイル","Benchmark":"ベンチマーク","Score":"スコア","Licence":"ライセンス","Status":"状態",
+"published":"公開済み","measured":"測定済み","api":"API","system":"システム",
+"statusnote":"状態：<b>公開済み</b> = 今日Hugging Faceに重みを公開；<b>測定済み</b> = 採点済み、公開予定；<b>API</b> = ホスト型APIで提供；<b>システム</b> = オープンベース上のPaletteパイプライン。",
+"Papers, benchmarks and the sweeps behind every claim.":"すべての主張の裏にある論文、ベンチマーク、先行調査。","Published work links out. Reports in preparation already have their numbers on this page.":"公開済みの成果はリンク先へ。準備中のレポートの数値はすでにこのページにあります。",
+"paper · published":"論文 · 公開","study · published":"研究ノート · 公開","benchmark · published":"ベンチマーク · 公開","prior art · published":"先行調査 · 公開","report · in preparation":"レポート · 準備中","benchmark · in preparation":"ベンチマーク · 準備中","reports · in preparation":"レポート · 準備中","Coming":"準備中","Read":"読む","Code, data, scorer":"コード・データ・採点器","Dataset":"データセット","Results on the model card":"モデルカードの結果","Prior-art log":"先行調査ログ","Naver sweep":"Naver調査","Numbers on this page":"このページの数値",
+"The stack":"スタック","One pipeline from Korean data to the device in your pocket.":"韓国語データからポケットの端末まで、ひとつのパイプライン。",
+"Palette's own teacher writes the training data, every model is scored on public benchmarks before it ships, and the same weights run in the browser, on the laptop and in the rack.":"Palette自身の教師モデルが学習データを書き、すべてのモデルは出荷前に公開ベンチマークで採点され、同じ重みがブラウザ・ノートPC・ラックで動きます。",
+"AI that Korean work can actually run on.":"韓国の仕事が実際に動かせるAI。","Tool calls on a phone, documents on a workstation, video in the cloud. One family, Korean-first, open where it can be, measured everywhere.":"スマホでツール呼び出し、ワークステーションで文書、クラウドで動画。ひとつのファミリー、韓国語ファースト、可能な限りオープン、すべて測定済み。",
+"rule1":"<b>韓国語オンデバイスのツール呼び出しでNo.1。</b> Songgot-Xは韓国最大のAI研究所2社のモデルを含む全測定モデルを上回り、ブラウザのタブに収まります。",
+"rule2":"<b>32Bに勝つ14B。</b> Palette-K-14BとPalette-K-Midmは韓国企業文書ベンチPALETTE-BENCH-KOで、2倍のサイズのQwen・Kakao・Naverのモデルを上回ります。",
+"rule3":"<b>混在音声で最良のオープン韓国語STT。</b> Palette STTはHiKEコードスイッチ・ベンチマークでオープンシステム中1位。",
+"rule4":"<b>生成を生き延びるハングル。</b> 画像・動画・試着写真の中のハングルを、出荷前にOCRで検証。",
+"rule5":"<b>データのある場所で動く。</b> 端末でオフライン、社内ラックでオンプレミス、または韓国・シンガポールでホスト。公開済みの全重みはApache 2.0。",
+"Run it":"動かす","Songgot Pocket (browser)":"Songgot Pocket（ブラウザ）","All on Hugging Face":"Hugging Faceで全て見る","FunctionChat exact-match scorer":"FunctionChat完全一致採点器","Songgot paper":"Songgot論文","songgot-tools-ko data":"songgot-tools-koデータ",
+"footer1":"端末とラックのための韓国語ファーストのモデル。すべて出荷前に公開採点を経ています。","footer2":"© 2026 Palette. 公開済みの全重みはApache 2.0。回答はAIモデルが生成します（AI基本法の表示）。","footer3":"数値の基準日 2026-09-17。",
+"Facts":"基本情報","Training data":"学習データ","What it does":"何ができるか","Measured":"測定結果","Parameters":"パラメータ","Files":"ファイル","Context":"コンテキスト","Runs in":"実行環境","Published":"公開日","Pretraining":"事前学習","Serve":"サービング","Adapter":"アダプタ","Stage":"段階","Fonts":"フォント","Data":"データ","Corpus":"コーパス","Training":"学習","API":"API","Pipeline":"パイプライン","LoRA":"LoRA",
+"call accuracy":"呼び出し精度","call accuracy, 54 MB":"呼び出し精度、54 MB","PALETTE-BENCH-KO, #1 of 7":"PALETTE-BENCH-KO、7モデル中1位","beats untuned 32B":"未調整の32Bに勝利","KDoc-OCRBench-V2":"KDoc-OCRBench-V2","HiKE CER, best open":"HiKE CER、オープン1位","Korean text edits":"ハングルの編集","print CER (base 0.570)":"プリントCER（ベース0.570）","Hangul CER (base 0.127)":"ハングルCER（ベース0.127）",
+"Qwen3.5-0.8B · post-trained by Palette":"Qwen3.5-0.8B · Paletteが事後学習","50M · trained from scratch · 6B tokens":"50M · ゼロから学習 · 6Bトークン","KT Mi:dm-2.0 11.5B · LoRA r=8":"KT Mi:dm-2.0 11.5B · LoRA r=8","Qwen2.5-14B · QLoRA":"Qwen2.5-14B · QLoRA","Qwen3.8-27B pipeline + Qwen3-VL-8B LoRA":"Qwen3.8-27Bパイプライン + Qwen3-VL-8B LoRA","Qwen3-ASR-1.7B · frozen tower":"Qwen3-ASR-1.7B · 音声タワー固定","SenseNova-U1.5 8B-MoT · stage A":"SenseNova-U1.5 8B-MoT · ステージA","fashn-vton-1.5 · fine-tuned":"fashn-vton-1.5 · ファインチューニング","MiniMax H3 · LoRA + verified-text API":"MiniMax H3 · LoRA + テキスト検証API",
+"Korean tool calling, call accuracy":"韓国語ツール呼び出し、呼び出し精度","Korean tool calling, name-only accuracy":"韓国語ツール呼び出し、関数名の精度","Songgot-X as shipped: quantized weights and cache":"出荷形態のSonggot-X：量子化重みとキャッシュ","Korean enterprise documents, overall":"韓国企業文書、総合","Korean document OCR, KDoc-OCRBench-V2":"韓国語文書OCR、KDoc-OCRBench-V2","Korean code-switched speech, character error rate":"韓英混在音声、文字誤り率","Korean text editing inside images":"画像内のハングル編集","Virtual try-on, printed text fidelity":"バーチャル試着、プリント文字の保持","Hangul inside generated video":"生成動画内のハングル",
+"Highest call accuracy of every model measured, 9 points above Kakao's Kanana-2 on Kakao's own benchmark. Songgot-X is also the only model in the top three you can ship inside a product: Kanana's licence forbids on-device redistribution and EXAONE is research-only.":"測定した全モデル中で最高の呼び出し精度。Kakao自身のベンチマークでKakaoのKanana-2を9ポイント上回ります。上位3モデルのうち製品に組み込んで配布できるのはSonggot-Xだけ：Kananaのライセンスはオンデバイス再配布を禁じ、EXAONEは研究専用です。",
+"Songgot-X picks the right function 96.4 percent of the time, level with Kanana-2 within one standard error, at 60 percent of its size.":"Songgot-Xは96.4%の確率で正しい関数を選びます。サイズは60%ながら、Kanana-2と標準誤差の範囲内で同等。",
+"The 505 MB build keeps 81 percent call accuracy, and a q8_0 cache halves context memory with no measurable cost. This is the file Pocket, Palette Desktop and the Chrome extension run.":"505 MBビルドでも呼び出し精度81%を維持し、q8_0キャッシュは測定可能な損失なしにコンテキストメモリを半減。Pocket、Palette Desktop、Chrome拡張が動かすのはこのファイルです。",
+"Palette-K-Midm leads the Korean base it adapts and every open comparator on the benchmark, including Kakao's and Naver's models; Palette-K-14B beats the untuned 32B.":"Palette-K-Midmはベースの韓国語モデルとKakao・Naverを含む全オープン比較モデルを上回り、Palette-K-14Bは未調整の32Bに勝ちます。",
+"84.2 ± 0.4, above the public leaderboard top, from the Palette document pipeline over an open base. The 8B adapter adds +35 points on header and footer handling.":"84.2 ± 0.4、公開リーダーボードの首位を上回るスコアを、オープンベース上のPalette文書パイプラインが達成。8Bアダプタはヘッダー・フッター処理で+35ポイント。",
+"Lower is better. Best open system on Korean-English code-switched speech, ahead of Cohere's transcription model, while keeping read-speech accuracy (FLEURS 2.9, Zeroth 3.1).":"低いほど良い。韓英混在音声でCohereの文字起こしモデルを上回る最良のオープンシステム。朗読音声の精度（FLEURS 2.9、Zeroth 3.1）も維持。",
+"The only open-weight model in the table, ahead of every closed editor on Korean text edits, with background preservation (SSIM 0.989) level with the best of them. Pilot set of six; the full benchmark follows.":"表で唯一のオープンウェイトモデルとして、ハングル編集で全クローズドエディタを上回り、背景保持（SSIM 0.989）は最良と同等。6問のパイロットで、フルベンチマークが続きます。",
+"Lower is better. Printed text on garments survives the try-on twice as well as the open base or the top commercial API, with face identity 0.871 and background SSIM 0.990 kept.":"低いほど良い。衣服のプリント文字がオープンベースや最上位の商用APIの2倍よく残り、顔の同一性0.871と背景SSIM 0.990を維持。",
+"Lower is better, 4-item test. The Palette video API goes further: declared Korean strings are verified by OCR on every clip before delivery, CER 0.000 on the declared text.":"低いほど良い、4問テスト。Palette動画APIはさらに進み、指定したハングル文字列を全クリップで納品前にOCR検証。指定文字列のCERは0.000。",
+"FunctionChat-Bench SingleCall (Kakao) · 500 items · exact match on name and arguments · our public scorer · 2026-09-16":"FunctionChat-Bench SingleCall（Kakao）· 500問 · 関数名と引数の完全一致 · Palette公開採点器 · 2026-09-16",
+"same 500 items · right function chosen · 2026-09-16":"同じ500問 · 正しい関数の選択 · 2026-09-16","same benchmark · Q4_K_M GGUF through llama.cpp · 2026-09-16":"同じベンチマーク · llama.cppのQ4_K_M GGUF · 2026-09-16",
+"PALETTE-BENCH-KO v0.2 · 32 items, 6 families · field-F1, key facts, gpt-4o rubric for 4 families · 2026-08-22":"PALETTE-BENCH-KO v0.2 · 32問、6ファミリー · フィールドF1、キーファクト、4ファミリーはgpt-4oルーブリック · 2026-08-22",
+"849 public-sector PDFs · leaderboard scorer, mean of 4 categories · 2026-09-03/06":"公的機関のPDF 849件 · リーダーボード採点器、4カテゴリ平均 · 2026-09-03/06","HiKE benchmark · corrected CER, lower is better · 2026-09-07":"HiKEベンチマーク · 補正CER、低いほど良い · 2026-09-07",
+"edit track · 6 items · success = target text read back by OCR · closed models via API · 2026-09-02":"編集トラック · 6問 · 成功 = OCRで目標文字列を読み取り · クローズドモデルはAPI経由 · 2026-09-02","PALETTE-BENCH-VTON hidden set · 28 items, 16 with print · CER, lower is better · two-run reproduced · 2026-09-01":"PALETTE-BENCH-VTON非公開セット · 28問、プリント16件 · CER、低いほど良い · 2回再現 · 2026-09-01",
+"PALETTE-BENCH-KO-VID track B · target-string CER, lower is better · 4-item LoRA test at scale 0.4 · 2026-09-06":"PALETTE-BENCH-KO-VIDトラックB · 目標文字列CER、低いほど良い · スケール0.4のLoRA 4問テスト · 2026-09-06",
+"The highest Korean tool-call accuracy measured on any on-device model, in a file that loads in a browser tab. Reads the request the way a Korean user says it: verbatim times, Korean number words, sender and receiver roles, memo bodies and titles.":"オンデバイスモデルで測定された最高の韓国語ツール呼び出し精度を、ブラウザのタブで開く1ファイルに。韓国語ユーザーの言い方そのままを理解：時刻表現をそのまま、韓国語の数詞、送信者・受信者の役割、メモの本文と件名。",
+"A complete Korean tool-calling model in 54 MB, trained from scratch on licence-clean text with a Korean-first tokenizer. Smallest openly licensed Korean model with a published tool-calling number; runs on a phone from a web page.":"54 MBに収まる完全な韓国語ツール呼び出しモデル。ライセンスの明確なテキストと韓国語ファーストのトークナイザでゼロから学習。ツール呼び出しスコアを公開した最小のオープンライセンス韓国語モデルで、Webページからスマホで動作。",
+"Top of PALETTE-BENCH-KO across seven Korean and open models, on the document work Korean companies actually do: 공문서, 품의서, meeting minutes, disclosures, policy.":"韓国企業が実際に行う文書業務（公文書、稟議書、議事録、開示、ポリシー）で、韓国語・オープンモデル7本中PALETTE-BENCH-KO 1位。",
+"A 14B that outscores the untuned 32B on every family. Fits one 80 GB card, serves on vLLM, Apache 2.0.":"全ファミリーで未調整の32Bを上回る14B。80 GBカード1枚に収まり、vLLMでサービング、Apache 2.0。",
+"State of the art on the public Korean document benchmark: 84.2 against a leaderboard top of 82.3. Government PDFs, tables, running heads and footers, at 2,200-pixel fidelity.":"公開の韓国語文書ベンチマークで最高性能：リーダーボード首位82.3に対し84.2。政府PDF、表、柱・フッターを2,200ピクセルの精度で。",
+"Korean speech as it is actually spoken in offices, with English terms mixed in. Best open result on the HiKE code-switch benchmark, ahead of Cohere, without giving up read-speech accuracy.":"英語の用語が混ざる、オフィスで実際に話される韓国語音声。HiKEコードスイッチ・ベンチマークでCohereを上回る最良のオープン結果、朗読音声の精度もそのまま。",
+"Korean text you can read inside generated and edited images: named fonts, dense text, layout boxes, 4K small type. Open weights, so it runs on-prem where brand assets stay private.":"生成・編集画像の中で読めるハングル：指定フォント、密なテキスト、レイアウトボックス、4Kの小さな文字。オープンウェイトなのでブランド資産を置くオンプレミスで動作。",
+"Try-on that keeps the print on the shirt, the face of the person and the background of the photo. Half the print error of the top commercial API, with the same person in the frame.":"シャツのプリント、人物の顔、写真の背景を保つ試着。最上位の商用APIの半分のプリント誤りで、同じ人物がそのまま。",
+"Korean signboards, menus, subtitles and labels that read correctly in generated video, verified by OCR on every clip before it is delivered. Served as an API with native Korean speech, 5 to 15 seconds, 768p.":"生成動画内の看板・メニュー・字幕・ラベルのハングルが正しく読めるよう、全クリップを納品前にOCR検証。韓国語音声付きのAPI、5〜15秒、768p。"
+},en:{
+"lede":"<b>Sixteen Korean-first models in four weeks.</b> The best of them beats Kakao's and LG's on Kakao's own benchmark, fits in a browser tab, and costs nothing per token.",
+"stat1":"Songgot-X 0.8B, Korean tool-call accuracy on FunctionChat-Bench SingleCall. Highest of every model measured, including Kakao's Kanana-2 (73.2).",
+"stat2":"The whole model, quantized, running inside a browser tab or a phone. 12 KB of context memory per token.",
+"stat3":"Model lines built since August 2026: language, documents, images, video, try-on, speech. Nine published, seven more measured and coming.",
+"ben1":"Download, run offline, ship inside your product. No per-token meter, no data leaving the device.",
+"ben2":"Tool calls in Korean, 공문서 and 품의서 drafting, meeting minutes to decisions, KDoc tables, Hangul inside generated images and video.",
+"ben3":"Exact match, character error rate, field-F1: scorers you can run yourself, with the strongest Korean and frontier models in the same table.",
+"ramnote":"Bars are the size of the file you load, as published: quantized GGUF for the on-device rows, bf16 safetensors for the rest (2 bytes per parameter). Context memory is extra and grows per token; Songgot-X keeps 12 KB per token at fp16 and 6.4 KB at q8_0 because only 6 of its 24 layers hold a growing cache.",
+"statusnote":"Status: <b>published</b> = weights on Hugging Face today; <b>measured</b> = scored, release coming; <b>api</b> = available as a hosted API; <b>system</b> = a Palette pipeline over an open base.",
+"rule1":"<b>Number one in Korean on-device tool calling.</b> Songgot-X leads every measured model, including the two built by Korea's largest AI labs, and it fits in a browser tab.",
+"rule2":"<b>A 14B that beats a 32B.</b> Palette-K-14B and Palette-K-Midm lead PALETTE-BENCH-KO on Korean enterprise documents ahead of Qwen, Kakao and Naver models twice their size.",
+"rule3":"<b>Best open Korean speech on mixed-language audio.</b> Palette STT leads the HiKE code-switch benchmark among open systems.",
+"rule4":"<b>Korean text that survives generation.</b> Hangul inside images, video and try-on photos, verified by OCR before it ships.",
+"rule5":"<b>Runs where your data is.</b> Offline on the device, on-prem in your rack, or hosted in Korea and Singapore. Apache 2.0 on every published weight.",
+"footer1":"Korean-first models for the device and the rack, every one scored in public before it ships.","footer2":"© 2026 Palette. Apache 2.0 on every published weight. Answers are generated by an AI model (AI 기본법 labelling).","footer3":"Numbers dated 2026-09-17."
+}};
+// ---------- apply language + theme ----------
+(function(){
+  function applyLang(lang){window.__lang=lang;try{localStorage.setItem("pm.lang",lang)}catch(e){}document.documentElement.lang=lang;
+    document.querySelectorAll("[data-i18n]").forEach(e=>{e.textContent=t(e.dataset.i18n)});
+    document.querySelectorAll("[data-i18n-html]").forEach(e=>{e.innerHTML=t(e.dataset.i18nHtml)});
+    document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===lang));
+    renderCharts();renderCards();renderPapers();specs(document.querySelector("#spectabs button[aria-selected=true]").dataset.tab);
+    document.querySelectorAll(".rv:not(.in),.chart:not(.in)").forEach(x=>x.classList.add("in"));
+    document.title=lang==="ko"?"Palette 모델":lang==="ja"?"Palette モデル":"Palette Models"}
+  document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click",()=>applyLang(b.dataset.lang)));
+  applyLang(window.__lang);
+  function applyTheme(th){const d=document.documentElement;if(th==="light")d.setAttribute("data-theme","light");else d.removeAttribute("data-theme");try{localStorage.setItem("pm.theme",th)}catch(e){}
+    const light=th==="light";["poly","knot"].forEach(id=>{const c=document.getElementById(id);c&&c._theme&&c._theme(light)});renderCards()}
+  $("#themebtn").addEventListener("click",()=>applyTheme(document.documentElement.getAttribute("data-theme")==="light"?"dark":"light"));
 })();
 </script>
