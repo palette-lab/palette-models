@@ -15,7 +15,7 @@
   html{color-scheme:dark}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;padding-inline:16px}
   a{color:inherit}
-  .wrap{max-width:1160px;margin:0 auto}
+  .wrap{max-width:none;margin:0 auto;padding-inline:clamp(8px,4vw,88px)}
   header.top{position:sticky;top:0;z-index:20;background:rgba(5,5,5,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line2);margin-inline:-16px;padding-inline:16px}
   .nav{display:flex;align-items:center;gap:28px;height:64px}
   .brand{font-weight:700;font-size:22px;letter-spacing:-.02em;text-decoration:none}
@@ -49,7 +49,7 @@
   .sub{color:var(--ink2);max-width:62ch;margin:0}
   .sechead{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap;margin-bottom:44px}
   /* benefits */
-  .benefits{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  .benefits{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start}
   .benefits .rows{display:flex;flex-direction:column}
   .brow{display:grid;grid-template-columns:40px 1fr;gap:14px;padding:28px 0;border-top:1px solid var(--line)}
   .brow:last-child{border-bottom:1px solid var(--line)}
@@ -75,7 +75,7 @@
   .tabs button:last-child{border-right:0}
   .tabs button[aria-selected="true"]{background:#fff;color:#050505}
   .tabs button:focus-visible{outline:2px solid #fff;outline-offset:-2px}
-  .ram{display:grid;grid-template-columns:1fr 1fr;column-gap:64px;row-gap:26px}
+  .ram{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));column-gap:64px;row-gap:26px}
   .rrow .lab{display:flex;justify-content:space-between;font-size:14px;margin-bottom:8px}
   .rrow .lab b{font-weight:600}
   .rrow .lab .v{font-variant-numeric:tabular-nums;color:var(--ink2)}
@@ -97,7 +97,7 @@
   .tip{position:fixed;pointer-events:none;background:#fff;color:#050505;font-size:12.5px;padding:6px 9px;border:1px solid #fff;transform:translate(-50%,calc(-100% - 10px));white-space:nowrap;opacity:0;transition:opacity .12s;z-index:30;font-variant-numeric:tabular-nums}
   .tip.on{opacity:1}
   /* cards */
-  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
   .card{background:var(--panel2);padding:26px 24px 22px;display:flex;flex-direction:column;gap:12px;text-decoration:none;min-height:250px;position:relative}
   .card:hover{background:var(--panel2)}
   .card canvas{width:100%;height:96px;display:block}
@@ -118,7 +118,7 @@
   .stat{display:inline-block;padding:3px 8px;border:1px solid var(--line);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);white-space:nowrap}
   .stat.pub{border-color:#fff;color:#fff}
   /* closing */
-  .closing{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+  .closing{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
   .rules{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
   .rules li{padding:16px 0;border-top:1px solid var(--line);color:var(--ink2);font-size:15px;display:grid;grid-template-columns:28px 1fr;gap:10px}
   .rules li:last-child{border-bottom:1px solid var(--line)}
@@ -148,7 +148,7 @@
   }
 
   /* research */
-  .papers{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+  .papers{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
   .paper{background:var(--bg);padding:24px;display:flex;flex-direction:column;gap:8px;min-height:170px}
   .paper .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
   .paper .t{font-weight:700;font-size:18px;letter-spacing:-.01em;line-height:1.3}
@@ -387,14 +387,14 @@ ram("lang");
 
 // charts: horizontal bars in SVG, one scale, labels inside the viewBox
 function chart(c){const box=el("div","chart"+(c.wide?" wide":""));box.innerHTML=`<h3>${c.title}</h3><p class="meta">${c.meta}</p>`;
-  const rows=c.rows, W=1000, rowH=34, left=Math.min(440,W*.44), right=90, H=rows.length*rowH+8, scale=(W-left-right)/c.max;
+  const rows=c.rows, W=1400, rowH=36, left=Math.min(470,W*.34), right=110, H=rows.length*rowH+8, scale=(W-left-right)/c.max;
   const NS="http://www.w3.org/2000/svg"; const svg=document.createElementNS(NS,"svg"); svg.setAttribute("viewBox",`0 0 ${W} ${H}`); svg.setAttribute("role","img"); svg.setAttribute("aria-label",c.title);
   const ticks=c.max>=100?[0,25,50,75,100]:c.max===1?[0,.25,.5,.75,1]:c.max===6?[0,2,4,6]:[0,c.max/2,c.max];
   ticks.forEach(t=>{const x=left+t*scale;const l=document.createElementNS(NS,"line");l.setAttribute("x1",x);l.setAttribute("x2",x);l.setAttribute("y1",0);l.setAttribute("y2",H-8);l.setAttribute("stroke","#1f1f1f");l.setAttribute("stroke-width","1");svg.appendChild(l)});
   rows.forEach((r,i)=>{const [name,v,ours]=r;const y=i*rowH;const g=document.createElementNS(NS,"g");
-    const t=document.createElementNS(NS,"text");t.setAttribute("x",left-14);t.setAttribute("y",y+21);t.setAttribute("text-anchor","end");t.setAttribute("fill",ours?"#fff":"rgba(255,255,255,.72)");t.setAttribute("font-size","14");t.setAttribute("font-weight",ours?"600":"400");t.textContent=name.length>58?name.slice(0,56)+"…":name;g.appendChild(t);
+    const t=document.createElementNS(NS,"text");t.setAttribute("x",left-14);t.setAttribute("y",y+21);t.setAttribute("text-anchor","end");t.setAttribute("fill",ours?"#fff":"rgba(255,255,255,.72)");t.setAttribute("font-size","15");t.setAttribute("font-weight",ours?"600":"400");t.textContent=name.length>60?name.slice(0,58)+"…":name;g.appendChild(t);
     const w=Math.max(3,v*scale);const rect=document.createElementNS(NS,"rect");rect.setAttribute("x",left);rect.setAttribute("y",y+6);rect.setAttribute("width",w);rect.setAttribute("height",rowH-14);rect.setAttribute("fill",ours?"#ffffff":"#3d3d3d");rect.setAttribute("class","bar");g.appendChild(rect);
-    const val=document.createElementNS(NS,"text");val.setAttribute("x",left+w+10);val.setAttribute("y",y+21);val.setAttribute("fill",ours?"#fff":"rgba(255,255,255,.72)");val.setAttribute("font-size","14");val.setAttribute("font-weight","600");val.setAttribute("font-variant-numeric","tabular-nums");val.textContent=(c.dec!=null?v.toFixed(c.dec):v.toFixed(1))+(c.unit||"");g.appendChild(val);
+    const val=document.createElementNS(NS,"text");val.setAttribute("x",left+w+10);val.setAttribute("y",y+21);val.setAttribute("fill",ours?"#fff":"rgba(255,255,255,.72)");val.setAttribute("font-size","15");val.setAttribute("font-weight","600");val.setAttribute("font-variant-numeric","tabular-nums");val.textContent=(c.dec!=null?v.toFixed(c.dec):v.toFixed(1))+(c.unit||"");g.appendChild(val);
     const hit=document.createElementNS(NS,"rect");hit.setAttribute("x",0);hit.setAttribute("y",y);hit.setAttribute("width",W);hit.setAttribute("height",rowH);hit.setAttribute("fill","transparent");
     hit.addEventListener("mousemove",e=>showTip(e,`${name}: ${(c.dec!=null?v.toFixed(c.dec):v.toFixed(1))}${c.unit||""}${c.lower?" (lower is better)":""}`));hit.addEventListener("mouseleave",hideTip);g.appendChild(hit);svg.appendChild(g)});
   box.appendChild(svg);
