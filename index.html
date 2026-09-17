@@ -41,7 +41,7 @@
   .hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
   .hero .veil{position:absolute;inset:0;pointer-events:none;background:radial-gradient(90% 80% at 22% 50%,rgba(5,5,5,.6) 0%,rgba(5,5,5,.2) 45%,rgba(5,5,5,0) 75%),linear-gradient(to bottom,rgba(5,5,5,.25),rgba(5,5,5,0) 25%,rgba(5,5,5,0) 75%,var(--bg))}
   #method{position:relative;overflow:hidden}
-  #knot{position:absolute;right:-6vw;top:50%;transform:translateY(-50%);width:min(56vw,760px);height:min(56vw,760px);pointer-events:none;opacity:.55}
+  #knot{position:absolute;right:-12vw;top:50%;transform:translateY(-50%);width:min(58vw,820px);height:min(58vw,820px);pointer-events:none;opacity:.42}
   #method .wrap{position:relative;z-index:1}
   .hero .scrollhint{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);color:var(--ink3);font-size:12px;letter-spacing:.14em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px}
   .hero .scrollhint i{width:1px;height:34px;background:linear-gradient(#fff,transparent);display:block;animation:drop 1.8s ease-in-out infinite}
@@ -538,32 +538,32 @@ document.querySelectorAll("#cards .card").forEach(a=>{a.addEventListener("click"
   if(!window.THREE){fallback2D();return}
   let renderer; try{renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:false,powerPreference:"high-performance"})}catch(e){fallback2D();return}
   renderer.setPixelRatio(Math.min(1.75,window.devicePixelRatio||1)); renderer.setClearColor(0x050505,1);
-  const scene=new THREE.Scene(); scene.fog=new THREE.FogExp2(0x050505,0.045);
-  const cam=new THREE.PerspectiveCamera(42,1,0.1,60); cam.position.set(0,1.9,6.0); cam.lookAt(0,0.3,0);
+  const scene=new THREE.Scene(); scene.fog=new THREE.FogExp2(0x050505,0.055);
+  const cam=new THREE.PerspectiveCamera(40,1,0.1,60); cam.position.set(0,0,8.5); cam.lookAt(0,0,0);
   // value noise
   const P=new Uint8Array(512); {let s=11;for(let i=0;i<256;i++)P[i]=i; for(let i=255;i>0;i--){s=(s*16807)%2147483647;const j=s%(i+1);[P[i],P[j]]=[P[j],P[i]]} for(let i=0;i<256;i++)P[256+i]=P[i]}
   const fade=t=>t*t*t*(t*(t*6-15)+10), lerp=(a,b,t)=>a+(b-a)*t, grad=(h,x,y)=>{switch(h&3){case 0:return x+y;case 1:return -x+y;case 2:return x-y;default:return -x-y}};
   function noise(x,y){const X=Math.floor(x)&255,Y=Math.floor(y)&255;x-=Math.floor(x);y-=Math.floor(y);const u=fade(x),v=fade(y);const A=P[X]+Y,B=P[X+1]+Y;return lerp(lerp(grad(P[A],x,y),grad(P[B],x-1,y),u),lerp(grad(P[A+1],x,y-1),grad(P[B+1],x-1,y-1),u),v)}
-  const W=34,H=20,SX=120,SY=70; const geo=new THREE.PlaneGeometry(W,H,SX,SY); geo.rotateX(-Math.PI/2.15);
+  const W=40,H=24,SX=110,SY=66; const geo=new THREE.PlaneGeometry(W,H,SX,SY); geo.rotateX(-0.28); geo.rotateY(0.18);
   const base=geo.attributes.position.array.slice(); const pos=geo.attributes.position;
-  const mat=new THREE.MeshStandardMaterial({color:0x3b3b3b,roughness:0.42,metalness:0.06,flatShading:true});
-  const mesh=new THREE.Mesh(geo,mat); mesh.position.set(0,-1.4,-1.5); scene.add(mesh);
-  scene.add(new THREE.AmbientLight(0xffffff,0.22));
-  const key=new THREE.DirectionalLight(0xffffff,1.7); key.position.set(-6,6,5); scene.add(key);
-  const sweep=new THREE.PointLight(0xffffff,3.2,26,1.6); sweep.position.set(-8,3.5,3); scene.add(sweep);
-  const rim=new THREE.DirectionalLight(0xb9c6ff,0.55); rim.position.set(7,4,-6); scene.add(rim);
+  const mat=new THREE.MeshStandardMaterial({color:0x262626,roughness:0.58,metalness:0.08,flatShading:true});
+  const mesh=new THREE.Mesh(geo,mat); mesh.position.set(1.5,-0.5,-4); scene.add(mesh); cv._scene={renderer,scene,cam,mesh};
+  scene.add(new THREE.AmbientLight(0xffffff,0.10));
+  const key=new THREE.DirectionalLight(0xffffff,0.85); key.position.set(-7,6,7); scene.add(key);
+  const sweep=new THREE.PointLight(0xffffff,0.9,20,2); sweep.position.set(-8,3.5,5); scene.add(sweep);
+  const rim=new THREE.DirectionalLight(0xb9c6ff,0.35); rim.position.set(8,-2,4); scene.add(rim);
   let mx=0,my=0,tx=0,ty=0; addEventListener("pointermove",e=>{tx=(e.clientX/innerWidth-.5);ty=(e.clientY/innerHeight-.5)},{passive:true});
   function resize(){const w=cv.clientWidth,h=cv.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()} resize(); addEventListener("resize",resize);
   let visible=true; new IntersectionObserver(es=>{visible=es[0].isIntersecting}).observe(cv);
   let t0=performance.now();
   function frame(now){
     const t=(now-t0)/1000;
-    for(let i=0,n=pos.count;i<n;i++){const x=base[i*3],z=base[i*3+2];const y=noise(x*0.28+t*0.06,z*0.28-t*0.045)*1.1+noise(x*0.9-t*0.03,z*0.9+t*0.08)*0.32+noise(x*2.4,z*2.4+t*0.12)*0.08;pos.array[i*3+1]=base[i*3+1]+y}
+    for(let i=0,n=pos.count;i<n;i++){const x=base[i*3],y=base[i*3+1];const d=noise(x*0.22+t*0.05,y*0.22-t*0.04)*1.5+noise(x*0.7-t*0.03,y*0.7+t*0.06)*0.45+noise(x*2.1,y*2.1+t*0.1)*0.1;pos.array[i*3+2]=base[i*3+2]+d}
     pos.needsUpdate=true; geo.computeVertexNormals();
-    sweep.position.x=Math.sin(t*0.21)*9; sweep.position.z=Math.cos(t*0.17)*4+1; sweep.intensity=2.6+Math.sin(t*0.5)*0.8;
+    sweep.position.x=Math.sin(t*0.19)*11; sweep.position.y=Math.cos(t*0.13)*4; sweep.intensity=0.8+Math.sin(t*0.5)*0.3;
     key.position.x=-6+Math.sin(t*0.09)*3;
     mx+=(tx-mx)*0.04; my+=(ty-my)*0.04; const sc=Math.min(1,scrollY/Math.max(1,innerHeight));
-    cam.position.x=mx*0.9; cam.position.y=1.9-my*0.5+sc*1.2; cam.position.z=6.0+sc*1.5; cam.lookAt(mx*0.4,0.3-sc*0.6,0);
+    cam.position.x=mx*1.2; cam.position.y=-my*0.8-sc*1.6; cam.position.z=8.5+sc*2; cam.lookAt(mx*0.5,-my*0.3-sc*0.8,0);
     renderer.render(scene,cam);
   }
   if(reduced){frame(t0+2000);return}
@@ -581,7 +581,7 @@ document.querySelectorAll("#cards .card").forEach(a=>{a.addEventListener("click"
   function resize(){const w=cv.clientWidth,h=cv.clientHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()} resize(); addEventListener("resize",resize);
   let visible=false; new IntersectionObserver(es=>{visible=es[0].isIntersecting}).observe(cv);
   function frame(t){knot.rotation.y=t*0.00012;knot.rotation.x=Math.sin(t*0.00009)*0.35;ico.rotation.y=-t*0.0003;ico.rotation.z=t*0.00011;r.render(sc,cam)}
-  if(reduced){frame(4000);return}
+  cv._render=()=>frame(4000); frame(4000); if(reduced)return;
   (function loop(t){if(visible&&!document.hidden)frame(t);requestAnimationFrame(loop)})(0);
 })();
 </script>
