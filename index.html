@@ -28,9 +28,16 @@
   .btn .gl{display:inline-grid;place-items:center;width:26px;height:26px;background:#050505;color:#fff;font-size:14px;font-weight:700}
   .btn.ghost{background:transparent;color:#fff;border-color:var(--line)}
   .btn.ghost .gl{background:#fff;color:#050505}
-  section{padding-block:96px;border-bottom:1px solid var(--line2)}
-  .hero{position:relative;padding-block:120px 110px;overflow:hidden;margin-inline:-16px;padding-inline:16px}
+  html{scroll-snap-type:y proximity;scroll-padding-top:64px}
+  section{min-height:calc(100vh - 64px);display:flex;align-items:center;padding-block:96px;border-bottom:1px solid var(--line2);margin-inline:-16px;padding-inline:16px;scroll-snap-align:start;background:var(--bg)}
+  section>.wrap{width:100%}
+  section:nth-of-type(even){background:var(--panel)}
+  section#benchmarks,section#specs{min-height:0;scroll-snap-align:none;display:block}
+  .hero{position:relative;min-height:calc(100vh - 64px);padding-block:80px;overflow:hidden;margin-inline:-16px;padding-inline:16px;display:flex;align-items:center}
   .hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:.9}
+  .hero .scrollhint{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);color:var(--ink3);font-size:12px;letter-spacing:.14em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .hero .scrollhint i{width:1px;height:34px;background:linear-gradient(#fff,transparent);display:block;animation:drop 1.8s ease-in-out infinite}
+  @keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
   .hero .wrap{position:relative}
   h1{font-size:clamp(40px,6.2vw,72px);line-height:1.12;font-weight:700;letter-spacing:-.025em;margin:0 0 22px;max-width:15ch;text-wrap:balance}
   .lede{font-size:clamp(17px,1.6vw,22px);color:var(--ink2);max-width:52ch;margin:0 0 34px}
@@ -79,7 +86,7 @@
   .note{color:var(--ink3);font-size:13px;margin-top:22px;max-width:70ch}
   /* charts */
   .charts{display:grid;grid-template-columns:1fr;gap:28px}
-  .chart{border:1px solid var(--line);background:var(--panel);padding:24px 24px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+  .chart{border:1px solid var(--line);background:var(--bg);padding:24px 24px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
   .chart.wide{grid-column:1/-1}
   .chart h3{margin:0}
   .chart .meta{color:var(--ink3);font-size:13px;margin:0 0 12px}
@@ -91,7 +98,7 @@
   .tip.on{opacity:1}
   /* cards */
   .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
-  .card{background:var(--bg);padding:26px 24px 22px;display:flex;flex-direction:column;gap:12px;text-decoration:none;min-height:250px;position:relative}
+  .card{background:var(--panel2);padding:26px 24px 22px;display:flex;flex-direction:column;gap:12px;text-decoration:none;min-height:250px;position:relative}
   .card:hover{background:var(--panel2)}
   .card canvas{width:100%;height:96px;display:block}
   .card .st{position:absolute;top:18px;right:18px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--line);color:var(--ink2)}
@@ -124,6 +131,8 @@
   .fgrid a:hover{color:#fff}
   .fbot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid var(--line2);padding-top:22px}
   @media (max-width:900px){
+    section,.hero{min-height:0}
+    html{scroll-snap-type:none}
     .benefits,.ram,.charts,.closing{grid-template-columns:1fr}
     .ladder{grid-template-columns:1fr 1fr}
     .ladder>div:nth-child(2){border-right:0}
@@ -183,7 +192,7 @@
   .hero .lede,.hero .btn{opacity:0;animation:wordin .8s cubic-bezier(.22,.61,.36,1) forwards}
   .hero .lede{animation-delay:.55s}.hero .btn{animation-delay:.75s}
   @keyframes wordin{to{opacity:1;transform:none}}
-  @media (prefers-reduced-motion:reduce){.rv,.hero h1 .w,.hero .lede,.hero .btn{opacity:1;transform:none;animation:none}.rrow .fill,.chart rect.bar{clip-path:none;transform:none;transition:none}}
+  @media (prefers-reduced-motion:reduce){html{scroll-snap-type:none}.hero .scrollhint i{animation:none}.rv,.hero h1 .w,.hero .lede,.hero .btn{opacity:1;transform:none;animation:none}.rrow .fill,.chart rect.bar{clip-path:none;transform:none;transition:none}}
 
 </style>
 
@@ -200,6 +209,7 @@
     <p class="lede"><b>Open weights</b><span class="dot">·</span><b>On the device or in your rack</b><span class="dot">·</span><b>Every number from a public scorer</b><span class="dot">·</span>No claim without a date, a benchmark and a comparator in the same table.</p>
     <a class="btn" href="#models"><span class="gl">»</span>Explore the models</a>
   </div>
+  <div class="scrollhint" aria-hidden="true"><span>Scroll</span><i></i></div>
 </section>
 
 <section>
