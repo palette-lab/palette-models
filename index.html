@@ -2,6 +2,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Palette Models</title>
 <meta name="description" content="Palette's own Korean-first models, every number measured with a public scorer.">
+<link rel="icon" href="assets/icon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <style>
@@ -18,8 +20,9 @@
   .wrap{max-width:none;margin:0 auto;padding-inline:clamp(8px,4vw,88px)}
   header.top{position:sticky;top:0;z-index:20;background:rgba(5,5,5,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line2);margin-inline:-16px;padding-inline:16px}
   .nav{display:flex;align-items:center;gap:28px;height:64px}
-  .brand{font-weight:700;font-size:22px;letter-spacing:-.02em;text-decoration:none}
-  .brand span{color:var(--ink3);font-weight:500}
+  .brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:14px;color:var(--ink3);letter-spacing:.02em}
+  .brand img{height:22px;width:auto;display:block}
+  .brand span{padding-left:10px;border-left:1px solid var(--line)}
   .nav ul{display:flex;gap:22px;list-style:none;margin:0 0 0 12px;padding:0;font-size:14px;color:var(--ink2)}
   .nav ul a{text-decoration:none}
   .nav ul a:hover{color:var(--ink)}
@@ -197,7 +200,7 @@
 </style>
 
 <header class="top"><div class="wrap nav">
-  <a class="brand" href="#top">palette<span>.models</span></a>
+  <a class="brand" href="#top"><img src="assets/logo.png" alt="Palette"><span>models</span></a>
   <ul><li><a href="#models">Models</a></li><li><a href="#benchmarks">Benchmarks</a></li><li><a href="#ram">Footprint</a></li><li><a href="#research">Research</a></li><li><a href="#method">Method</a></li></ul>
   <a class="btn cta" href="https://huggingface.co/palette-lab"><span class="gl">»</span>Hugging Face</a>
 </div></header>
@@ -294,7 +297,7 @@
 
 <footer class="wrap">
   <div class="fgrid">
-    <div><a class="brand" href="#top">palette<span>.models</span></a><p style="margin:12px 0 0;max-width:34ch;color:var(--ink2)">Korean-first models for the device and the rack, every one scored in public before it ships.</p></div>
+    <div><a class="brand" href="#top"><img src="assets/logo.png" alt="Palette"><span>models</span></a><p style="margin:14px 0 0;max-width:34ch;color:var(--ink2)">Korean-first models for the device and the rack, every one scored in public before it ships.</p></div>
     <div><h4>Models</h4><ul><li><a href="https://huggingface.co/palette-lab/songgot-x-0.8b">Songgot-X 0.8B</a></li><li><a href="https://huggingface.co/palette-lab/songgot-12l">Songgot 12L</a></li><li><a href="https://huggingface.co/palette-lab/palette-k-midm">Palette-K-Midm</a></li><li><a href="https://huggingface.co/palette-lab/palette-k-14b">Palette-K-14B</a></li><li><a href="https://huggingface.co/palette-lab">All on Hugging Face</a></li></ul></div>
     <div><h4>Benchmarks</h4><ul><li><a href="https://huggingface.co/datasets/palette-lab/palette-bench-ko">PALETTE-BENCH-KO</a></li><li><a href="https://github.com/hanishkeloth/songgot">FunctionChat exact-match scorer</a></li><li><a href="https://hanishkeloth.github.io/songgot">Songgot paper</a></li><li><a href="https://huggingface.co/datasets/palette-lab/songgot-tools-ko">songgot-tools-ko data</a></li></ul></div>
     <div><h4>Run it</h4><ul><li><a href="https://hanishkeloth.github.io/songgot/app/">Songgot Pocket (browser)</a></li><li><a href="https://www.pltt.xyz">Palette OS</a></li><li><a href="https://github.com/hanishkeloth">GitHub</a></li></ul></div>
