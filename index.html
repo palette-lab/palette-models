@@ -388,7 +388,7 @@ const RAM = {
     {n:"Qwen3-0.6B · bf16",v:1.2},{n:"EXAONE-4.0-1.2B · bf16",v:2.5},{n:"Kanana-2-1.3B · bf16",v:2.6},{n:"MiniCPM5-2B · bf16",v:4.0},{n:"Gemma 4 E4B · bf16 (Desktop chat tier)",v:8.6}
   ],
   big:[
-    {n:"Palette-K-Midm 11.5B · bf16",v:23,ours:true},{n:"Palette-K-14B · bf16",v:29,ours:true},{n:"Qwen2.5-32B · bf16",v:65},{n:"Kanana-1.5-8B · bf16",v:16},{n:"HyperCLOVAX-SEED-14B · bf16",v:28},{n:"Mi:dm-2.0 11.5B · bf16",v:23}
+    {n:"Gyeol 결 7.3B · bf16",v:15,ours:true},{n:"Palette-K-Midm 11.5B · bf16",v:23,ours:true},{n:"Palette-K-14B · bf16",v:29,ours:true},{n:"Qwen2.5-32B · bf16",v:65},{n:"Kanana-1.5-8B · bf16",v:16},{n:"HyperCLOVAX-SEED-14B · bf16",v:28},{n:"Mi:dm-2.0 11.5B · bf16",v:23}
   ],
   other:[
     {n:"Palette STT v1c · Qwen3-ASR 1.7B · bf16",v:3.4,ours:true},{n:"Palette-K-Doc LoRA · Qwen3-VL-8B · bf16",v:17,ours:true},{n:"Palette-K-Doc pipeline · Qwen3.8-27B · bf16",v:54,ours:true},{n:"Palette-K-Image A · SenseNova-U1.5 8B-MoT · bf16",v:36,ours:true},{n:"Palette-K-Video LoRA on MiniMax H3 · bf16",v:66,ours:true},{n:"Ornith-1.5-35B-A3B · Q4_K_M (Desktop Pro tier)",v:21.7}
@@ -401,6 +401,12 @@ const CHARTS = [
   {id:"fcname", title:"Korean tool calling, name-only accuracy", meta:"same 500 items · right function chosen · 2026-09-16", unit:"%", max:100,
    rows:[["Kanana-2-1.3B-Instruct",97.2],["Songgot-X 0.8B",96.4,1],["EXAONE-4.0-1.2B",85.2],["Songgot-L 303M",75.0,1],["Qwen3.5-0.8B, zero-shot",73.8],["Songgot-M 126M",73.8,1],["Songgot 12L 50M",73.6,1],["Qwen3-0.6B, zero-shot",70.8]],
    cap:"Songgot-X picks the right function 96.4 percent of the time, level with Kanana-2 within one standard error, at 60 percent of its size."},
+  {id:"kdecide", wide:true, dec:3, title:"Korean typed decisions, agreement with the reference", meta:"K-DECIDE hold-out · 800 Korean items · same prompt to every model · paired against TypeSafe Jev 1.13.0 through its API · 2026-09-21",
+   unit:"", max:1, rows:[["Gyeol v2b 7.3B",0.873,1],["Jev 1.13.0 (TypeSafe)",0.855],["A.X-4.0-Light 7.3B, untuned",0.670]],
+   cap:"A 7.3B open model ahead of Jev on Korean decisions, on identical items. True/false 0.904 against 0.872, choice 0.857 against 0.843. Four decisions answered together in 84 ms on one H100."},
+  {id:"ksts", dec:3, title:"Korean ordered-scale judgement, KLUE-STS", meta:"519 sentence pairs · six ordered levels · identical prompt · 2026-09-21",
+   unit:"", max:0.5, rows:[["Gyeol 7.3B",0.403,1],["A.X-4.0-Light, untuned",0.341],["Qwen3.8-27B, untuned",0.335],["Jev 1.13.0 (TypeSafe)",0.237],["chance",0.167]],
+   cap:"On a real six-level Korean scale Gyeol reads the ordering; Jev sits just above chance. Urgency, risk and satisfaction levels are what a decision product runs on."},
   {id:"shipped", title:"Songgot-X as shipped: quantized weights and cache", meta:"same benchmark · Q4_K_M GGUF through llama.cpp · 2026-09-16", unit:"%", max:100,
    rows:[["bf16 weights, fp16 cache (published row)",82.2,1],["Q4_K_M, f16 KV cache",80.2,1],["Q4_K_M, q8_0 KV cache",81.0,1],["Q4_K_M, q4_0 KV cache",80.8,1]],
    cap:"The 505 MB build keeps 81 percent call accuracy, and a q8_0 cache halves context memory with no measurable cost. This is the file Pocket, Palette Desktop and the Chrome extension run."},
@@ -424,6 +430,7 @@ const CHARTS = [
    cap:"Lower is better, 4-item test. The Palette video API goes further: declared Korean strings are verified by OCR on every clip before delivery, CER 0.000 on the declared text."}
 ];
 const CARDS = [
+  {name:"Gyeol 결",base:"SKT A.X-4.0-Light 7.3B · Korean-first typed decisions",num:"0.873",unit:"K-DECIDE agreement, Jev 0.855",st:"api",href:"https://gyeol.pltt.dev",art:"arc"},
   {name:"Songgot-X 0.8B",base:"Qwen3.5-0.8B · post-trained by Palette",num:"82.2",unit:"call accuracy",st:"published",href:"https://huggingface.co/palette-lab/songgot-x-0.8b",art:"rose"},
   {name:"Songgot 12L",base:"50M · trained from scratch · 6B tokens",num:"33.0",unit:"call accuracy, 54 MB",st:"published",href:"https://huggingface.co/palette-lab/songgot-12l",art:"petal"},
   {name:"Palette-K-Midm",base:"KT Mi:dm-2.0 11.5B · LoRA r=8",num:"0.866",unit:"PALETTE-BENCH-KO, #1 of 7",st:"published",href:"https://huggingface.co/palette-lab/palette-k-midm",art:"ring"},
@@ -440,6 +447,7 @@ const SPECS = [
   ["Songgot-M","from scratch","126M","≈130 MB q8_0","FunctionChat SingleCall","33.2 / 73.8","Apache 2.0","published","lang","https://huggingface.co/palette-lab/songgot-m"],
   ["Songgot-L","from scratch, 12B tokens","303M","≈310 MB q8_0","FunctionChat SingleCall","29.4 / 75.0","Apache 2.0","published","lang","https://huggingface.co/palette-lab/songgot-l"],
     ["Palette-K-Midm","K-intelligence Midm-2.0-Base-Instruct (MIT)","11.5B","23 GB bf16","PALETTE-BENCH-KO v0.2","0.866, #1 of 7","Apache 2.0","published","lang","https://huggingface.co/palette-lab/palette-k-midm"],
+  ["Gyeol 결 v2b","SKT A.X-4.0-Light (Apache 2.0) · LoRA r=16, answer-token loss","7.3B","15 GB bf16 merged · 40 MB adapter","K-DECIDE hold-out, agreement","0.873 (Jev 0.855, n=800)","Apache 2.0","api","lang","https://gyeol.pltt.dev"],
   ["Palette-K-14B","Qwen2.5-14B-Instruct, QLoRA merged","14B","29 GB bf16","PALETTE-BENCH-KO v0.2","0.839","Apache 2.0","published","lang","https://huggingface.co/palette-lab/palette-k-14b"],
   ["Palette-K-Doc pipeline","Qwen3.8-27B, 2200-px render, header/footer pass","27B","54 GB bf16","KDoc-OCRBench-V2","84.2 ± 0.4","Apache 2.0 base","system","vision",""],
   ["Palette-K-Doc LoRA v1","Qwen3-VL-8B, 5,880 synthetic pages","8B","17 GB bf16","KDoc-OCRBench-V2","77.4 ± 0.7","Apache 2.0","measured","vision",""],
@@ -497,6 +505,7 @@ specs("all");
 
 
 const PAPERS = [
+  {k:"report · in preparation",t:"Gyeol (결): Korean-first typed decisions from a 7.3B open model",d:"K-DECIDE, a Korean benchmark for choice, true/false and ordered-scale decisions; a Korean contrastive curation recipe; and a 7.3B model that answers ahead of Jev on identical Korean items at 84 ms for four decisions. Tables built from run logs.",links:[["Benchmark, live",'https://gyeol.pltt.dev/benchmark'],["Playground",'https://gyeol.pltt.dev/playground']]},
   {k:"paper · published",t:"Songgot (송곳): a Korean-first tiny agentic model for tool calling on the device",d:"The Songgot family from 50M to 0.8B: Korean-first tokenizer, tool-calling data written by Palette's own teacher, and the path to the highest Korean on-device tool-calling accuracy measured. Tables built from run logs.",links:[["Read",'https://hanishkeloth.github.io/songgot'],["Code, data, scorer",'https://github.com/hanishkeloth/songgot']]},
   {k:"study · published",t:"KV cache: what DeepSeek-V4.1-Flash does, and what of it reaches a 0.8B on-device model",d:"890 bytes per token reconstructed from the config, our whole table in the same units, measured prefix reuse and quantized-cache accuracy on the shipped Songgot-X build.",links:[["Read",'https://github.com/hanishkeloth/songgot/blob/main/docs/KV_CACHE_DEEPSEEK_V41_STUDY.md']]},
   {k:"benchmark · published",t:"PALETTE-BENCH-KO: Korean enterprise documents",d:"32 items across six families: meeting minutes to decisions, disclosure comprehension, 공문서 / 품의서 / email drafting, policy compliance. Deterministic scorers where possible, CC BY 4.0.",links:[["Dataset",'https://huggingface.co/datasets/palette-lab/palette-bench-ko'],["Results on the model card",'https://huggingface.co/palette-lab/palette-k-midm']]},
@@ -509,6 +518,12 @@ const PAPERS = [
 function renderPapers(){const pp=$("#papers");pp.innerHTML="";PAPERS.forEach(x=>{const d=el("div","paper");d.innerHTML=`<div class="k">${t(x.k)}</div><div class="t">${t(x.t)}</div><div class="d">${t(x.d)}</div><div class="links">${x.links.filter(l=>l[0]).map(l=>`<a href="${l[1]}">${t(l[0])} »</a>`).join("")}${x.k.includes("preparation")?`<span>${t("Coming")}</span>`:""}</div>`;pp.appendChild(d)})} renderPapers(); renderCards();
 
 const DETAIL = {
+ "Gyeol 결":{base:"skt/A.X-4.0-Light (SKT, 7.3B, Apache 2.0), adapted by Palette to make typed decisions about Korean text",
+  facts:[["Parameters","7.3B; LoRA r=16 on every language linear, 40.4M trained"],["Primitives","choice (up to 26 options), true/false, ordered score (2–10 levels) — each answered with the probability of every allowed option"],["Serve","one H100, four decisions in 84 ms, shared context read once"],["API","TypeSafe-shaped POST /v1/systemone at gyeol.pltt.dev; free keys self-serve"],["Licence","Apache 2.0"],["Published","2026-09-21, served; weights to follow on the Hub"]],
+  data:["5,166 Korean contrastive rows across ten Korean domains (고객센터, 배달, 민원, 카드, 통신, 채용, 부동산, 병원, 학교, IT 운영): a realistic decision, then the same text with one fact changed so the answer changes; a blind checker must get both sides right"],
+  why:"Korean-first decision making: a Korean schema in, a typed answer with calibrated probabilities out, no generated text. Ahead of TypeSafe's Jev on identical Korean items, at a fraction of the size and latency, with open weights.",
+  bench:[["K-DECIDE hold-out, 800 items","0.873 (Jev 1.13.0: 0.855; base untuned: 0.670)"],["true/false · choice","0.904 · 0.857 (Jev 0.872 · 0.843)"],["KLUE-STS, six-level scale","0.403 (Jev 0.237)"],["K-DECIDE public layer, 8,316 items","0.804 from 0.780 untuned, calibration error halved"]],
+  links:[["Try it","https://gyeol.pltt.dev/playground"],["Benchmark","https://gyeol.pltt.dev/benchmark"],["API docs","https://gyeol.pltt.dev/docs"]]},
  "Songgot-X 0.8B":{base:"Qwen/Qwen3.5-0.8B (Apache 2.0), post-trained by Palette with the base's own chat template and tool-call format",
   facts:[["Parameters","0.8B (24 layers: 18 Gated DeltaNet + 6 attention, 2 KV heads × 256)"],["Files","songgot-x-q4_k_m.gguf 505 MB · songgot-x-q8_0.gguf 774 MB · safetensors bf16"],["Context","262k positions; 12 KB of cache per token at fp16, 6.4 KB at q8_0"],["Licence","Apache 2.0, lineage on the card"],["Runs in","Songgot Pocket (mobile offline LLM in the browser, Android and desktop), Palette Desktop, Chrome extension, llama.cpp, Ollama, LM Studio"],["Published","2026-09-16, weights of the evening soup"]],
   data:["175,000 rows sampled from Songgot v8 (palette-lab/songgot-tools-ko): Korean tool-calling pairs written by Palette-K-Midm from invented schemas, verified by a second pass; no closed model produced a label","31,307 targeted synthetic rows (weight 2) for copy fidelity, from/to roles, Korean number words, two-digit years","10,861 human Korean requests from Amazon MASSIVE 1.1 ko-KR train (CC BY 4.0), mapped to massive-agents functions; dev and test never used","KoSGD dialogue-state rows; v11–v13 targeted rounds (payload-only text, 19xx years, parameter-description following, verbatim time expressions, old/new roles, query-versus-create intent)"],
@@ -696,10 +711,15 @@ $("#dclose").textContent=t("Close");$("#dclose").addEventListener("click",()=>dl
 <script>
 // ---------- dictionaries: Korean first, then Japanese; English strings are the keys ----------
 window.T={ko:{
+"SKT A.X-4.0-Light 7.3B · Korean-first typed decisions":"SKT A.X-4.0-Light 7.3B · 한국어 우선 의사결정","K-DECIDE agreement, Jev 0.855":"K-DECIDE 일치율, Jev 0.855",
+"Korean typed decisions, agreement with the reference":"한국어 의사결정, 정답 일치율","K-DECIDE hold-out · 800 Korean items · same prompt to every model · paired against TypeSafe Jev 1.13.0 through its API · 2026-09-21":"K-DECIDE 보류세트 · 한국어 800문항 · 모든 모델에 같은 프롬프트 · TypeSafe Jev 1.13.0과 API로 짝지어 비교 · 2026-09-21",
+"A 7.3B open model ahead of Jev on Korean decisions, on identical items. True/false 0.904 against 0.872, choice 0.857 against 0.843. Four decisions answered together in 84 ms on one H100.":"같은 문항에서 Jev보다 앞선 7.3B 공개 모델. 참/거짓 0.904 대 0.872, 선택형 0.857 대 0.843. H100 한 장에서 네 결정을 한 번에 84ms.",
+"Korean ordered-scale judgement, KLUE-STS":"한국어 순서 척도 판단, KLUE-STS","519 sentence pairs · six ordered levels · identical prompt · 2026-09-21":"문장 쌍 519개 · 여섯 단계 순서 척도 · 같은 프롬프트 · 2026-09-21",
+"On a real six-level Korean scale Gyeol reads the ordering; Jev sits just above chance. Urgency, risk and satisfaction levels are what a decision product runs on.":"진짜 여섯 단계 한국어 척도에서 결은 순서를 읽고, Jev는 찍는 수준을 겨우 넘깁니다. 긴급도·위험도·만족도가 의사결정 제품의 본체입니다.",
 "Models":"모델","Benchmarks":"벤치마크","Footprint":"메모리","Research":"연구","Stack":"스택","Why Palette":"왜 Palette인가","Connect":"문의하기","Close":"닫기","Scroll":"스크롤",
 "Palette · Seoul and Bengaluru · 2026":"Palette · 서울 · 벵갈루루 · 2026",
 "Korea's #1 on-device AI. Built by Palette.":"한국 1위 온디바이스 AI. Palette가 만듭니다.",
-"lede":"<b>4주 만에 한국어 우선 모델 16종.</b> 그중 최고 모델은 카카오 자체 벤치마크에서 카카오·LG 모델을 앞서고, 브라우저 탭 안에서 돌아가며, 토큰당 비용은 0원입니다.",
+"lede":"<b>4주 만에 한국어 우선 모델 17종.</b> 그중 최고 모델은 카카오 자체 벤치마크에서 카카오·LG 모델을 앞서고, 브라우저 탭 안에서 돌아가며, 토큰당 비용은 0원입니다.",
 "Explore the models":"모델 보기","Measured against":"비교 측정 대상",
 "82.2 % call accuracy":"호출 정확도 82.2 %","505 MB on a phone":"휴대폰에서 505 MB","#1 of 7 on enterprise documents":"기업 문서 벤치마크 7개 모델 중 1위","84.2 on Korean document OCR":"한국어 문서 OCR 84.2","0 won per token":"토큰당 0원",
 "stat1":"Songgot-X 0.8B, FunctionChat-Bench SingleCall 한국어 툴 호출 정확도. 카카오 Kanana-2(73.2)를 포함해 측정한 모든 모델 중 최고.",
@@ -763,10 +783,15 @@ window.T={ko:{
 "Korean signboards, menus, subtitles and labels that read correctly in generated video, verified by OCR on every clip before it is delivered. Served as an API with native Korean speech, 5 to 15 seconds, 768p.":"생성 영상 속 간판·메뉴·자막·라벨의 한글이 제대로 읽히도록 모든 클립을 배송 전 OCR로 검증. 한국어 음성이 포함된 API, 5~15초, 768p."
 },
 ja:{
+"SKT A.X-4.0-Light 7.3B · Korean-first typed decisions":"SKT A.X-4.0-Light 7.3B · 韓国語ファーストの型付き判断","K-DECIDE agreement, Jev 0.855":"K-DECIDE 一致率、Jev 0.855",
+"Korean typed decisions, agreement with the reference":"韓国語の型付き判断、正解との一致率","K-DECIDE hold-out · 800 Korean items · same prompt to every model · paired against TypeSafe Jev 1.13.0 through its API · 2026-09-21":"K-DECIDE 保留セット · 韓国語800問 · 全モデル同一プロンプト · TypeSafe Jev 1.13.0 とAPI経由で対比較 · 2026-09-21",
+"A 7.3B open model ahead of Jev on Korean decisions, on identical items. True/false 0.904 against 0.872, choice 0.857 against 0.843. Four decisions answered together in 84 ms on one H100.":"同一問題で Jev を上回る7.3Bの公開モデル。真偽 0.904 対 0.872、選択 0.857 対 0.843。H100一枚で4つの判断をまとめて84ms。",
+"Korean ordered-scale judgement, KLUE-STS":"韓国語の順序尺度判断、KLUE-STS","519 sentence pairs · six ordered levels · identical prompt · 2026-09-21":"文ペア519 · 6段階の順序尺度 · 同一プロンプト · 2026-09-21",
+"On a real six-level Korean scale Gyeol reads the ordering; Jev sits just above chance. Urgency, risk and satisfaction levels are what a decision product runs on.":"実際の6段階韓国語尺度で結は順序を読み、Jev は偶然をわずかに上回る程度。緊急度・リスク・満足度こそ判断プロダクトの本体です。",
 "Models":"モデル","Benchmarks":"ベンチマーク","Footprint":"メモリ","Research":"研究","Stack":"スタック","Why Palette":"なぜPalette","Connect":"お問い合わせ","Close":"閉じる","Scroll":"スクロール",
 "Palette · Seoul and Bengaluru · 2026":"Palette · ソウル · ベンガルール · 2026",
 "Korea's #1 on-device AI. Built by Palette.":"韓国No.1のオンデバイスAI。Paletteが作る。",
-"lede":"<b>4週間で韓国語ファーストのモデルを16本。</b> 最良のモデルはKakao自身のベンチマークでKakao・LGのモデルを上回り、ブラウザのタブ内で動き、トークン単価はゼロ。",
+"lede":"<b>4週間で韓国語ファーストのモデルを17本。</b> 最良のモデルはKakao自身のベンチマークでKakao・LGのモデルを上回り、ブラウザのタブ内で動き、トークン単価はゼロ。",
 "Explore the models":"モデルを見る","Measured against":"比較対象",
 "82.2 % call accuracy":"呼び出し精度 82.2 %","505 MB on a phone":"スマホで505 MB","#1 of 7 on enterprise documents":"企業文書ベンチで7モデル中1位","84.2 on Korean document OCR":"韓国語文書OCR 84.2","0 won per token":"トークン単価0ウォン",
 "stat1":"Songgot-X 0.8B、FunctionChat-Bench SingleCallの韓国語ツール呼び出し精度。KakaoのKanana-2（73.2）を含む全測定モデル中で最高。",
@@ -829,7 +854,7 @@ ja:{
 "Try-on that keeps the print on the shirt, the face of the person and the background of the photo. Half the print error of the top commercial API, with the same person in the frame.":"シャツのプリント、人物の顔、写真の背景を保つ試着。最上位の商用APIの半分のプリント誤りで、同じ人物がそのまま。",
 "Korean signboards, menus, subtitles and labels that read correctly in generated video, verified by OCR on every clip before it is delivered. Served as an API with native Korean speech, 5 to 15 seconds, 768p.":"生成動画内の看板・メニュー・字幕・ラベルのハングルが正しく読めるよう、全クリップを納品前にOCR検証。韓国語音声付きのAPI、5〜15秒、768p。"
 },en:{
-"lede":"<b>Sixteen Korean-first models in four weeks.</b> The best of them beats Kakao's and LG's on Kakao's own benchmark, fits in a browser tab, and costs nothing per token.",
+"lede":"<b>Seventeen Korean-first models in four weeks.</b> The best of them beats Kakao's and LG's on Kakao's own benchmark, fits in a browser tab, and costs nothing per token.",
 "stat1":"Songgot-X 0.8B, Korean tool-call accuracy on FunctionChat-Bench SingleCall. Highest of every model measured, including Kakao's Kanana-2 (73.2).",
 "stat2":"The whole model, quantized, running inside a browser tab or a phone. 12 KB of context memory per token.",
 "stat3":"Model lines built since August 2026: language, documents, images, video, try-on, speech. Nine published, seven more measured and coming.",
