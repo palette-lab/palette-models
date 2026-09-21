@@ -447,7 +447,7 @@ const SPECS = [
   ["Songgot-M","from scratch","126M","≈130 MB q8_0","FunctionChat SingleCall","33.2 / 73.8","Apache 2.0","published","lang","https://huggingface.co/palette-lab/songgot-m"],
   ["Songgot-L","from scratch, 12B tokens","303M","≈310 MB q8_0","FunctionChat SingleCall","29.4 / 75.0","Apache 2.0","published","lang","https://huggingface.co/palette-lab/songgot-l"],
     ["Palette-K-Midm","K-intelligence Midm-2.0-Base-Instruct (MIT)","11.5B","23 GB bf16","PALETTE-BENCH-KO v0.2","0.866, #1 of 7","Apache 2.0","published","lang","https://huggingface.co/palette-lab/palette-k-midm"],
-  ["Gyeol 결 v2b","SKT A.X-4.0-Light (Apache 2.0) · LoRA r=16, answer-token loss","7.3B","15 GB bf16 merged · 40 MB adapter","K-DECIDE hold-out, agreement","0.873 (Jev 0.855, n=800)","Apache 2.0","api","lang","https://gyeol.pltt.dev"],
+  ["Gyeol 결 v2b","SKT A.X-4.0-Light · LoRA r=16, answer-token loss","7.3B","15 GB bf16 merged · 40 MB adapter","K-DECIDE hold-out, agreement","0.873 (Jev 0.855, n=800)","Hosted API","api","lang","https://gyeol.pltt.dev"],
   ["Palette-K-14B","Qwen2.5-14B-Instruct, QLoRA merged","14B","29 GB bf16","PALETTE-BENCH-KO v0.2","0.839","Apache 2.0","published","lang","https://huggingface.co/palette-lab/palette-k-14b"],
   ["Palette-K-Doc pipeline","Qwen3.8-27B, 2200-px render, header/footer pass","27B","54 GB bf16","KDoc-OCRBench-V2","84.2 ± 0.4","Apache 2.0 base","system","vision",""],
   ["Palette-K-Doc LoRA v1","Qwen3-VL-8B, 5,880 synthetic pages","8B","17 GB bf16","KDoc-OCRBench-V2","77.4 ± 0.7","Apache 2.0","measured","vision",""],
@@ -518,10 +518,10 @@ const PAPERS = [
 function renderPapers(){const pp=$("#papers");pp.innerHTML="";PAPERS.forEach(x=>{const d=el("div","paper");d.innerHTML=`<div class="k">${t(x.k)}</div><div class="t">${t(x.t)}</div><div class="d">${t(x.d)}</div><div class="links">${x.links.filter(l=>l[0]).map(l=>`<a href="${l[1]}">${t(l[0])} »</a>`).join("")}${x.k.includes("preparation")?`<span>${t("Coming")}</span>`:""}</div>`;pp.appendChild(d)})} renderPapers(); renderCards();
 
 const DETAIL = {
- "Gyeol 결":{base:"skt/A.X-4.0-Light (SKT, 7.3B, Apache 2.0), adapted by Palette to make typed decisions about Korean text",
+ "Gyeol 결":{base:"skt/A.X-4.0-Light (SKT, 7.3B), adapted by Palette to make typed decisions about Korean text",
   facts:[["Parameters","7.3B; LoRA r=16 on every language linear, 40.4M trained"],["Primitives","choice (up to 26 options), true/false, ordered score (2–10 levels) — each answered with the probability of every allowed option"],["Serve","one H100, four decisions in 84 ms, shared context read once"],["API","TypeSafe-shaped POST /v1/systemone at gyeol.pltt.dev; free keys self-serve"],["Licence","Apache 2.0"],["Published","2026-09-21, served; weights to follow on the Hub"]],
   data:["5,166 Korean contrastive rows across ten Korean domains (고객센터, 배달, 민원, 카드, 통신, 채용, 부동산, 병원, 학교, IT 운영): a realistic decision, then the same text with one fact changed so the answer changes; a blind checker must get both sides right"],
-  why:"Korean-first decision making: a Korean schema in, a typed answer with calibrated probabilities out, no generated text. Ahead of TypeSafe's Jev on identical Korean items, at a fraction of the size and latency, with open weights.",
+  why:"Korean-first decision making: a Korean schema in, a typed answer with calibrated probabilities out, no generated text. Ahead of TypeSafe's Jev on identical Korean items, at a fraction of the size and latency.",
   bench:[["K-DECIDE hold-out, 800 items","0.873 (Jev 1.13.0: 0.855; base untuned: 0.670)"],["true/false · choice","0.904 · 0.857 (Jev 0.872 · 0.843)"],["KLUE-STS, six-level scale","0.403 (Jev 0.237)"],["K-DECIDE public layer, 8,316 items","0.804 from 0.780 untuned, calibration error halved"]],
   links:[["Try it","https://gyeol.pltt.dev/playground"],["Benchmark","https://gyeol.pltt.dev/benchmark"],["API docs","https://gyeol.pltt.dev/docs"]]},
  "Songgot-X 0.8B":{base:"Qwen/Qwen3.5-0.8B (Apache 2.0), post-trained by Palette with the base's own chat template and tool-call format",
